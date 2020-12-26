@@ -5,10 +5,17 @@ public class BoardDTO {
 	private String num;
 	private String title; 
 	private String content;
-	private java.sql.Date postdate;
+	private String postdate;
 	private String id;
 	private String notice;
 	private String attachedfile;
+	private String name;
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getNum() {
 		return num;
 	}
@@ -27,10 +34,10 @@ public class BoardDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public java.sql.Date getPostdate() {
+	public String getPostdate() {
 		return postdate;
 	}
-	public void setPostdate(java.sql.Date postdate) {
+	public void setPostdate(String postdate) {
 		this.postdate = postdate;
 	}
 	public String getId() {
