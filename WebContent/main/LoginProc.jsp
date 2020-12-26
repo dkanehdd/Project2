@@ -1,3 +1,5 @@
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="model.MemberDAO"%>
 <%@page import="java.util.Map"%>
 <%@page import="util.CookieUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -7,15 +9,11 @@
 String id = request.getParameter("user_id");
 String pw = request.getParameter("user_pw");
 String id_save = request.getParameter("id_save");
-//web.xml에 저장된 컨텍스트 초기화 파라미터 가져옴
-String drv = application.getInitParameter("MariaJDBCDriver");
-String url = application.getInitParameter("MariaConnectURL");
-String mid = application.getInitParameter("MariaUser");
-String mpw = application.getInitParameter("MariaPass");
 
+System.out.print(id);
 //DAO객체 생성 및 DB연결
-MemberDAO dao = new MemberDAO(drv, url);
-
+MemberDAO dao = new MemberDAO();
+JSONObject jsonObj = new JSONObject();
 //방법3 : Map 컬렉션에 저장된 회원정보를 통해 세션영역에 저장
 Map<String, String> memberMap = dao.getMemberMap(id, pw);
 if(memberMap.get("id")!=null){
@@ -33,11 +31,21 @@ if(memberMap.get("id")!=null){
 		CookieUtil.makeCookie(request, response, "SaveId", id,
 				60*60*24);
 	}
-	response.sendRedirect("Login.jsp");
+	jsonObj.put("result", 1);
+	String html  ="<p style='padding:10px 0px 10px 10px'><span style='font-weight:bold; color:#333;' id='user_name'>"
+			+memberMap.get("name")+"님,</span> 반갑습니다.<br />로그인 하셨습니다.</p>"
+	+"<p style='text-align:right; padding-right:10px;'>"
+	+"<a href=''><img src='../images/login_btn04.gif' /></a>"
+	+"<a href=''><img src='../images/login_btn05.gif' /></a>"
+	+"</p>";
+	jsonObj.put("HTML", html);
+	
 }
 else{
-	//로그인실패시 리퀘스트 영역에 속성을 저장후 로그인페이지로 포워드한다.
-	request.setAttribute("ERROR_MSG", "회원이 아닙니다.");
-	request.getRequestDispatcher("Login.jsp").forward(request, response);
+	jsonObj.put("result", 0);
+	jsonObj.put("message", "가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
 }
+dao.close();
+String jsonTxt = jsonObj.toJSONString();
+out.println(jsonTxt);
 %>

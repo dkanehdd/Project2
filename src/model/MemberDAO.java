@@ -16,23 +16,11 @@ public class MemberDAO {
 	// 기본생성자를 통한 DB연결
 	public MemberDAO() {
 		String driver = "org.mariadb.jdbc.Driver";
-		String url = "jdbc:mariadb://127.0.0.1:3306/kosmo_db";
+		String url = "jdbc:mariadb://127.0.0.1:3306/suamil_db";
 		try {
 			Class.forName(driver);
-			String id = "kosmo_user";
+			String id = "suamil_user";
 			String pw = "1234";
-			con = DriverManager.getConnection(url, id, pw);
-			System.out.println("DB연결성공(디폴트생성자)");
-		} catch (Exception e) {
-			System.out.println("DB연결실패(디폴트생성자)");
-			e.printStackTrace();
-		}
-	}
-
-	// JSP에서 컨텍스트 초기화 파라미터를 인자로 전달하여 DB연결
-	public MemberDAO(String driver, String url, String id, String pw) {
-		try {
-			Class.forName(driver);
 			con = DriverManager.getConnection(url, id, pw);
 			System.out.println("DB연결성공(디폴트생성자)");
 		} catch (Exception e) {
@@ -47,7 +35,7 @@ public class MemberDAO {
 		// 회원정보를 저장할 Map컬렉션 생성
 		Map<String, String> maps = new HashMap<String, String>();
 
-		String query = "SELECT id, pass, name FROM member" + " where id=? and pass=?";
+		String query = "SELECT id, pass, name FROM membership" + " where id=? and pass=?";
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, id);
@@ -59,6 +47,7 @@ public class MemberDAO {
 				maps.put("id", rs.getString("id"));
 				maps.put("pass", rs.getString("pass"));
 				maps.put("name", rs.getString("name"));
+				System.out.println("결과");
 			} else {
 				System.out.println("결과셋이 없습니다.");
 			}
@@ -73,7 +62,7 @@ public class MemberDAO {
 	public boolean isMember(String id, String pass) {
 
 		// 쿼리문 작성
-		String sql = "SELECT COUNT(*) FROM projectmember WHERE id=?" + "	AND pass=?";
+		String sql = "SELECT COUNT(*) FROM membership WHERE id=?" + "	AND pass=?";
 		int isMember = 0;
 		boolean isFlag = false;
 
@@ -107,7 +96,7 @@ public class MemberDAO {
 
 		int affected = 0;
 		try {
-			String sql = "INSERT INTO projectmember ( id, pass,NAME,open_email,email,telephone,cellphone,address,admin) "
+			String sql = "INSERT INTO membership ( id, pass,NAME,open_email,email,telephone,cellphone,address,admin) "
 					+ " VALUES ("
 					+ " ?,?,?,?,?,?,?,?,?)";
 			psmt = con.prepareStatement(sql);
@@ -126,5 +115,42 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return affected;
+	}
+	
+	public boolean overlapId(String id) {
+		boolean isFlag = false;
+		
+		String sql = "SELECT COUNT(*) FROM membership WHERE id=?";
+		int isMember = 0;
+		try {
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			rs.next();
+			isMember = rs.getInt(1);
+//			System.out.println("affected:" + isMember);
+			if (isMember == 0)//중복된 아이디가 없는경우
+				isFlag = true;
+			else //중복된 아이디가 있는경우
+				isFlag = false;
+		} catch (Exception e) {
+			// 예외가 발생한다면 확인이 불가능하므로 무조건 false를 반환한다.
+			isFlag = false;
+			e.printStackTrace();
+		}
+		
+		return isFlag;
+	}
+	
+	public void close() {
+		try {
+			//사용된 자원이 있다면 자원해제 해준다.
+			if(rs!=null) rs.close();
+			if(psmt!=null) psmt.close();
+			if(con!=null) con.close();
+		}
+		catch (Exception e) {
+			System.out.println("자원반납시 예외발생");
+		}
 	}
 }

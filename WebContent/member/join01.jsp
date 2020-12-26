@@ -498,7 +498,7 @@
                 checkCount++;
             });
             if (checkCount!=1) {
-                alert("약관에 동의하셔야 합니다");
+                alert("이용약관과 개인정보취급방침에 동의해주세요.");
                 return false;
             }
 		});

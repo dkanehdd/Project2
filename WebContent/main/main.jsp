@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%
 //리퀘스트 내장객체를 이용해서 생성된 쿠키를 가져온다.
 Cookie[] cookies = request.getCookies();
@@ -21,58 +21,60 @@ if(cookies!=null){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>마포구립장애인 직업재활센터</title>
+<script src="../bootstrap3.3.7/jquery/jquery-3.5.1.js"></script>
 <style type="text/css" media="screen">
 @import url("../css/common.css");
 @import url("../css/main.css");
 @import url("../css/sub.css");
 </style>
 <script>
-/*
-$.ajax()
-	: jQuery에서 사용되는 AJAX관련 메소드로 load(), get(), post()
-	메소드의 기능 모두를 가지고 있다. 그러므로 가장 활용빈도가 높다.
-	별도의 인자가 존재하지 않고 JSON형태의 인자 하나만 사용한다.
-인자의 속성
-	url: 요청할 서버의 경로,
-	type: 요청시 사용할 전송방식. get, post
-	dataType: 콜백 데이터 형식. json, xml, script, text, html 등
-	success: 요청에 성공했을때 콜백메소드
-	error: 요청에 실패했을때 콜백메소드
-	contentType: 전송시 사용할 컨텐츠 타입,(get과 post가 다름)
-	data: 서버로 전송할 파라미터. JSON형식
-*/
 $(function() {
-	$('#login').click(function() {
-		$.ajax({
-			//요청할 서버의 경로
-			url : "LoginProc.jsp",
-			//콜백데이터 타입
-			dataType : "html",
-			//요청시 전송방식
-			type : "post",
-			//전송방식에 따른 컨텐츠타입
-			contentType : "application/x-www-form-urlencoded;charset:utf-8;",
-			//파라미터. JSON형식
-			data : {
+	$('#login').click(function(){
+		//요청할 서버의 URL
+ 		/*
+ 			serialize()
+ 			: <form> 태그의 하위태그들을 "name"속성을 통해 JSON으로
+ 		 	조립해준다. 전송할 폼값이 많을경우 주로 사용한다. 
+ 		*/
+		var s_params = $('#loginFrm').serialize();
+		$.post(
+				"LoginProc.jsp",
+			{
 				'user_id':$('#user_id').val(),
-				'user_pw':$('#user_pw').val(),
-				'id_save':$('#id_save').val()
-			},
-			//성공, 실패시 콜백메소드. 함수이름만 써서 호출한다.
-			success : sucFunc,
-			error : errFunc
-		});
+				'user_pw':$('#user_pw').val()
+			},			
+			function(resData){
+				var d = JSON.parse(resData);
+					console.log(d.result);
+				if(d.result==1){
+					//JSON에 포함된 HTML값을 얻어와서 삽입
+					$('#loginFrm').html(d.HTML);
+					//로그인 버튼은 숨김처리
+					/*
+					#btnLogin2의 경우 loginFrm 하위에 있는 태그이므로
+					위에 html()함수로 초기화를 시켰기때문에 hide()하지 않아도 
+					없어지는데.....
+					*/
+				}
+				else{
+					/*
+					로그인실패시 JSON에 저장되있던 
+					message키값을 얻어와 경고창에 띄워줌
+					*/
+					alert(d.message);
+				}
+				
+				//콜백된 데이터를 Text형태로 출력한다. 
+				$('#jsonDisplay').html(resData);
+			}
+		);		
 	});
 });
-	
 function errFunc() {
 	alert("에러발생. 디버깅하세욤.");
 }
 
-function sucFunc(resData) {
-	alert("$.ajax()메소드 요청성공");
-	$('#login_box').html(resData);
-}
+
 </script>
 </head>
 <body>
@@ -88,10 +90,10 @@ function sucFunc(resData) {
 			<div class="main_con_left">
 				<p class="main_title" style="border:0px; margin-bottom:0px;"><img src="../images/main_title01.gif" alt="로그인 LOGIN" /></p>
 				<div class="login_box" id="login_box">
-					<form action="">
-					<%
-					if(session.getAttribute("USER_ID")==null){//로그인 전 상태
-					%>
+				<%
+				if(session.getAttribute("USER_ID")==null){//로그인 전 상태
+				%>
+				<form id="loginFrm" method="post">
 					<table cellpadding="0" cellspacing="0" border="0">
 						<colgroup>
 							<col width="45px" />
@@ -101,29 +103,28 @@ function sucFunc(resData) {
 						
 						<tr>
 							<th><img src="../images/login_tit01.gif" alt="아이디" /></th>
-							<td><input type="text" name="user_id" value="" class="login_input" /></td>
+							<td><input type="text" id="user_id" value="" class="login_input" /></td>
 							<td rowspan="2"><input type="image" src="../images/login_btn01.gif" alt="로그인" id="login"/></td>
 						</tr>
 						<tr>
 							<th><img src="../images/login_tit02.gif" alt="패스워드" /></th>
-							<td><input type="text" name="user_pw" value="" class="login_input" /></td>
+							<td><input type="text" id="user_pw" value="" class="login_input" /></td>
 						</tr>
 					</table>
 					<p>
-						<input type="checkbox" name="id_save" value="checked" /><img src="../images/login_tit03.gif" alt="저장" />
+						<input type="checkbox" id="id_save" value="checked" /><img src="../images/login_tit03.gif" alt="저장" />
 						<a href="../member/id_pw.jsp"><img src="../images/login_btn02.gif" alt="아이디/패스워드찾기" /></a>
 						<a href="../member/join01.jsp"><img src="../images/login_btn03.gif" alt="회원가입" /></a>
 					</p>
 					</form>
 					<%}else{ %>
 						<!-- 로그인 후 -->
-						<p style="padding:10px 0px 10px 10px"><span style="font-weight:bold; color:#333;">000님,</span> 반갑습니다.<br />로그인 하셨습니다.</p>
+						<p style="padding:10px 0px 10px 10px"><span style="font-weight:bold; color:#333;" id="user_name"><%=session.getAttribute("USER_NAME") %>님,</span> 반갑습니다.<br />로그인 하셨습니다.</p>
 						<p style="text-align:right; padding-right:10px;">
 							<a href=""><img src="../images/login_btn04.gif" /></a>
-							<a href=""><img src="../images/login_btn05.gif" /></a>
+							<a href="Logout.jsp"><img src="../images/login_btn05.gif" /></a>
 						</p>
-			 		<%} %>
-			 		
+					<%} %>
 				</div>
 			</div>
 			<div class="main_con_center">
