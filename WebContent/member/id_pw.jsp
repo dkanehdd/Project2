@@ -2,7 +2,32 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
 
-
+<script>
+$(function() {
+	
+	$('#find_id').click(function() {
+		$.get('./find_id.jsp', 
+			{
+				'id_name':$('#id_name').val(),
+				'id_email':$('#id_email').val()
+			},	
+		function(data) {
+			alert(data);
+		});
+	});
+	$('#find_pw').click(function() {
+		$.get('./find_pw.jsp', 
+			{
+				'pw_id':$('#pw_id').val(),
+				'pw_name':$('#pw_name').val(),
+				'pw_email':$('#pw_email').val()
+			},	
+		function(data) {
+			alert(data);
+		});
+	});
+});
+</script>
  <body>
 	<center>
 	<div id="wrap">
@@ -22,19 +47,19 @@
 				<div class="idpw_box">
 					<div class="id_box">
 						<ul> 
-							<li><input type="text" name="" value="" class="login_input01" /></li>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
+							<li><input type="text" id="id_name" value="" class="login_input01" /></li>
+							<li><input type="text" id="id_email" value="" class="login_input01" /></li>
 						</ul>
-						<a href=""><img src="../images/member/id_btn01.gif" class="id_btn" /></a>
-						<a href=""><img src="../images/login_btn03.gif" class="id_btn02" /></a>
+						<button id="find_id"><img src="../images/member/id_btn01.gif" class="id_btn" /></button>
+						<a href="./join01.jsp"><img src="../images/login_btn03.gif" class="id_btn02" /></a>
 					</div>
 					<div class="pw_box">
 						<ul>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
-							<li><input type="text" name="" value="" class="login_input01" /></li>
+							<li><input type="text" id="pw_id" value="" class="login_input01" /></li>
+							<li><input type="text" id="pw_name" value="" class="login_input01" /></li>
+							<li><input type="text" id="pw_email" value="" class="login_input01" /></li>
 						</ul>
-						<a href=""><img src="../images/member/id_btn01.gif" class="pw_btn" /></a>
+						<button id="find_pw"><img src="../images/member/id_btn01.gif" class="pw_btn" /></button>
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,10 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 public class MemberDAO {
 
 	Connection con;// 커넥션 객체를 멤버변수로 설정하여 공유
@@ -15,16 +19,15 @@ public class MemberDAO {
 
 	// 기본생성자를 통한 DB연결
 	public MemberDAO() {
-		String driver = "org.mariadb.jdbc.Driver";
-		String url = "jdbc:mariadb://127.0.0.1:3306/suamil_db";
 		try {
-			Class.forName(driver);
-			String id = "suamil_user";
-			String pw = "1234";
-			con = DriverManager.getConnection(url, id, pw);
-			System.out.println("DB연결성공(디폴트생성자)");
-		} catch (Exception e) {
-			System.out.println("DB연결실패(디폴트생성자)");
+			Context initctx = new InitialContext();
+			Context ctx = (Context)initctx.lookup("java:comp/env");
+			DataSource source = (DataSource)ctx.lookup("jdbc_mariadb");
+			con = source.getConnection();
+			System.out.println("DBCP 연결성공");
+		}
+		catch (Exception e) {
+			System.out.println("DBCP 연결실패");
 			e.printStackTrace();
 		}
 	}
@@ -152,5 +155,45 @@ public class MemberDAO {
 		catch (Exception e) {
 			System.out.println("자원반납시 예외발생");
 		}
+	}
+	
+	public String findID(String name, String email) {
+		String id = "";
+		try {
+			String sql = "SELECT id FROM membership WHERE NAME=? AND email=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.setString(2, email);
+			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				id = rs.getString(1);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
+	public String findPW(String name, String email, String id) {
+		String pass ="";
+		try {
+			String sql = "SELECT pass FROM membership WHERE NAME=? AND email=? AND id=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.setString(2, email);
+			psmt.setString(3, id);
+			
+			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				pass = rs.getString(1);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pass;
 	}
 }

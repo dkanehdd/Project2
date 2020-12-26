@@ -208,7 +208,7 @@
 
 				<p class="join_title"><img src="../images/join_tit03.gif" alt="회원정보입력" /></p>
 				<!-- 회원가입폼  method는 포스트로 바꾸기!! -->
-				<form action="" name="regiform" onsubmit="return isValidate(this);" >
+				<form action="../member/MemberJoin.do" name="regiform" onsubmit="return isValidate(this);" method="post">
 				
 				<table cellpadding="0" cellspacing="0" border="0" class="join_box">
 					<colgroup>
@@ -284,7 +284,7 @@
 		<option value="yahoo.com" >yahoo.com</option>
 	</select>
 	 
-						<input type="checkbox" name="open_email" value="1">
+						<input type="checkbox" name="open_email">
 						<span>이메일 수신동의</span></td>
 					</tr>
 					<tr id="dom" style="display: none; color: red; font-size: 0.8em; text-align: right;">

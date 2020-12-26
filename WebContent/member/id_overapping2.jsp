@@ -5,6 +5,7 @@
 String id = request.getParameter("id");
 MemberDAO dao = new MemberDAO();
 boolean overId = dao.overlapId(id);
+dao.close();
 %>
 <!DOCTYPE html>
 <html>
