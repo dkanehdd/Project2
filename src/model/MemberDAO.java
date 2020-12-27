@@ -61,7 +61,34 @@ public class MemberDAO {
 		}
 		return maps;
 	}
+	
+	public MemberDTO getMemberDTO(String id) {
 
+		// 회원정보를 저장할 Map컬렉션 생성
+		MemberDTO dto = new MemberDTO();
+
+		String query = "SELECT id, name, email FROM membership" + " where id=?";
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+
+			// 회원정보가 있다면 put()을 통해 정보를 저장한다.
+			if (rs.next()) {
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+			} else {
+				System.out.println("결과셋이 없습니다.");
+			}
+
+		} catch (Exception e) {
+			System.out.println("getMemberMap오류");
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
 	public boolean isMember(String id, String pass) {
 
 		// 쿼리문 작성
@@ -184,7 +211,6 @@ public class MemberDAO {
 			psmt.setString(1, name);
 			psmt.setString(2, email);
 			psmt.setString(3, id);
-			
 			
 			rs = psmt.executeQuery();
 			if(rs.next()) {

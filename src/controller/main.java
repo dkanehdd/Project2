@@ -25,7 +25,7 @@ public class main extends HttpServlet{
 		
 		req.setAttribute("noticeLists", noticeLists);
 		req.setAttribute("lists", lists);
-		
+		dao.close();
 		
 		req.getRequestDispatcher("../main/main.jsp").forward(req, resp);
 	}

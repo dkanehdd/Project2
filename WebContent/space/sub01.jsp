@@ -1,3 +1,4 @@
+<%@page import="util.PagingUtil"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="model.BoardDTO"%>
@@ -107,7 +108,7 @@ dao.close();
 </div>
 <div class="row">
 	<!-- 게시판리스트부분 -->
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered table-danger">
 	<colgroup>
 		<col width="80px"/>
 		<col width="*"/>
@@ -124,7 +125,7 @@ dao.close();
 		<th class="text-center">작성자</th>
 		<th class="text-center">작성일</th>
 		<th class="text-center">조회수</th>
-		<th class="text-center">첨부</th>
+<!-- 		<th class="text-center">첨부</th> -->
 	</tr>
 	</thead>
 	
@@ -177,8 +178,8 @@ else{
 	<!-- 각종 버튼 부분 -->
 	<!-- <button type="reset" class="btn">Reset</button> -->
 		
-	<button type="button" class="btn btn-default" 
-		onclick="location.href='sub01_write.jsp';">글쓰기</button>
+<!-- 	<button type="button" class="btn btn-default"  -->
+<!-- 		onclick="location.href='sub01_write.jsp';">글쓰기</button> -->
 				
 	<!-- <button type="button" class="btn btn-primary">수정하기</button>
 	<button type="button" class="btn btn-success">삭제하기</button>
@@ -189,13 +190,8 @@ else{
 <div class="row text-center">
 	<!-- 페이지번호 부분 -->
 	<ul class="pagination">
-		<li><span class="glyphicon glyphicon-fast-backward"></span></li>
-		<li><a href="#">1</a></li>		
-		<li class="active"><a href="#">2</a></li>
-		<li><a href="#">3</a></li>
-		<li><a href="#">4</a></li>		
-		<li><a href="#">5</a></li>
-		<li><span class="glyphicon glyphicon-fast-forward"></span></li>
+		<%=PagingUtil.pagingBS4(totalRecordCount, 
+					pageSize, blockPage, nowPage, "sub01.jsp?"+queryStr) %>
 	</ul>	
 </div>
 

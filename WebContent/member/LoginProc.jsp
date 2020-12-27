@@ -9,6 +9,7 @@
 String id = request.getParameter("user_id");
 String pw = request.getParameter("user_pw");
 String id_save = request.getParameter("id_save");
+String returnURL = request.getParameter("returnURL");
 System.out.println(id_save);
 System.out.println(id);
 //DAO객체 생성 및 DB연결
@@ -30,7 +31,16 @@ if(memberMap.get("id")!=null){
 		CookieUtil.makeCookie(request, response, "SaveId", id,
 				60*60*24);
 	}
-	response.sendRedirect("../main/main.do");
+	// returnURL의 값에 따라 페이지 이동을 제어한다.
+	if(returnURL==null||returnURL.equals("")){
+		//로그인 페이지로 이동
+		response.sendRedirect("../main/main.do");
+	}
+	else{
+		//세션이 없어 진입하지못한 페이지로 이동한다.
+		response.sendRedirect(returnURL);
+	}
+	
 }
 else{
 %>

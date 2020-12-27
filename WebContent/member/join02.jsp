@@ -41,26 +41,26 @@
                 return false;
             }
             
-            if (!frm.tel1.value || !frm.tel2.value) {
-                alert("휴대폰번호를 입력하세요");
-                return false;
-            }
-            if (!frm.zipcode.value || !frm.addr1.value) {
-                alert("주소를 입력하세요");
+            if (!frm.mobile1.value || !frm.mobile2.value ||!frm.mobile3.value ) {
+                alert("핸드폰번호를 입력하세요");
                 return false;
             }
             if (!frm.email1.value || !frm.email2.value) {
                 alert("이메일을 입력하세요");
                 return false;
             }
+            if (!frm.zipcode.value || !frm.addr1.value) {
+                alert("주소를 입력하세요");
+                return false;
+            }
             if (checkId()) {
                 return false;
             }
-            if (checkPw(frm.pw1.value)) {
+            if (checkPw(frm.user_pass.value)) {
                 alert("비밀번호 형식이 잘못되었습니다.");
                 return false;
             }
-            if (checkPw2(frm.pw2.value)) {
+            if (checkPw2(frm.pass2.value)) {
                 alert("비밀번호확인이 일치하지 않습니다.");
                 return false;
             }
@@ -114,7 +114,7 @@
             var f1 = true,
                 f2 = true,
                 f3 = true;
-            if (pw.length >= 6 && pw.length <= 20) {
+            if (pw.length >= 4 && pw.length <= 12) {
                 for (var i = 0; i < pw.length; i++) {
                     if (pw.charCodeAt(i) >= 48 && pw.charCodeAt(i) <= 57) {
                         f1 = false;
