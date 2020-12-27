@@ -95,15 +95,12 @@ dao.close();
 			<option value="name"
 			<%=(searchColumn!=null && searchColumn.equals("name")) ?
 					"selected":""%>>작성자</option>
-			<option value="b.id"
-			<%=(searchColumn!=null && searchColumn.equals("b.id")) ?
-					"selected":""%>>아이디</option>
 		</select>
 	</div>
 	<div class="input-group">
 		<input type="text" name="searchWord"  class="form-control"/>
 		<div class="input-group-btn">
-			<button type="submit" class="btn btn-default">
+			<button type="submit" class="btn btn-default" style="height: 34px">
 				<i class="glyphicon glyphicon-search"></i>
 			</button>
 		</div>
@@ -178,7 +175,7 @@ else{
 	</tbody>
 	</table>
 </div>
-						<div class="row text-right" style="padding-right: 50px;">
+						<div class="row text-right" style="">
 							<!-- 각종 버튼 부분 -->
 							<!-- <button type="reset" class="btn">Reset</button> -->
 
@@ -193,7 +190,7 @@ else{
 						</div>
 						<div class="row text-center">
 							<!-- 페이지번호 부분 -->
-							<ul class="pagination">
+							<ul class="pagination pager">
 		<%=PagingUtil.pagingBS4(totalRecordCount, 
 					pageSize, blockPage, nowPage, "sub03.jsp?"+queryStr) %>
 	</ul>	

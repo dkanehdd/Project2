@@ -33,100 +33,21 @@ if (cookies != null) {
 
 <script type="text/javascript">
 $(function () {
-	calendarMaker($("#calendar"), new Date());
-	calMoveEvtFn();
+	$.ajax({
+		url : './calender.js',
+		type : 'get',
+		dataType : "script",
+		//요청성공시 콜백메소드 : 무기명함수 형태로 정의됨
+		success : function(resData) { 
+			calendarMaker($("#calendar"), new Date());
+			calMoveEvtFn();
+		},
+		//요청실패시 콜백메소드 : 외부함수 형태로 정의됨.
+		error : function() {
+			alert('에러발생');
+		} //호출시 함수명만 명시한다.
+	});
 });
-	var nowDate = new Date();
-	function calendarMaker(target, date) {
-		if (date == null || date == undefined) {
-	        date = new Date();
-	    }
-		nowDate = date;
-		var year = nowDate.getFullYear();
-		console.log(year);
-        var month = nowDate.getMonth() + 1;
-        var html = assembly(year, month);
-        
-        var thisMonth = new Date(nowDate.getFullYear(), nowDate.getMonth(), 1);
-        var thisLastDay = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, 0);
-        
-        html += "<tr>";
-        var cnt = 0;
-        //빈 공백 만들어주기
-        for (i = 0; i < thisMonth.getDay(); i++) {
-        	html += "<td></td>";
-            cnt++;
-        }
-
-        //날짜 채우기
-        for (i = 1; i <= thisLastDay.getDate(); i++) {
-            if (cnt % 7 == 0) { html += "<tr>"; }
-
-            html += "<td>" + i + "</td>";
-            cnt++;
-            if (cnt % 7 == 0) {
-            	html += "</tr>";
-            }
-        }
-        html+= "</table>";
-        $("#calendar").html(html);
-	}
-    
-	
-	function assembly(year, month) {
-        var calendar_html_code =
-        	"<p class='main_title' style='border: 0px; margin-bottom: 0px;> "+
-			"<img src='../images/main_title05.gif' alt='월간일정 CALENDAR' /></p>"+
-        	"<div class='cal_top'><table cellpadding='0' cellspacing='0' border='0'>"+
-			"<colgroup>"+
-			"	<col width='13px;' />"+
-			"	<col width='*' />"+
-				"<col width='13px;' />"+
-			"</colgroup>"+
-			"<tr><td><button id='prev' class='btn-link'><img src='../images/cal_a01.gif'"+
-				"		style='margin-top: 3px;' /></button></td>"+
-				"<td><img src='../images/calender_"+year+".gif' />&nbsp;&nbsp;<img"+
-				"	src='../images/calender_m"+month+".gif' /></td>"+
-				"<td><button id='next' class='btn-link'><img src='../images/cal_a02.gif'"+
-						"style='margin-top: 3px;' /></button></td>"+
-			"</tr>"+
-			"</table>"+
-			"</div>"+
-			'<div class="cal_bottom">'+
-			'<table cellpadding="0" cellspacing="0" border="0" class="calendar">'+
-            "<colgroup>" +
-            "<col width='14%' />" +
-            "<col width='14%' />" +
-            "<col width='14%' />" +
-            "<col width='14%' />" +
-            "<col width='14%' />" +
-            "<col width='14%' />" +
-            "<col width='14%' />" +
-            "</colgroup>" +
-            '<tr>'+
-			'<th><img src="../images/day01.gif" alt="S" /></th>'+
-			'<th><img src="../images/day02.gif" alt="M" /></th>'+
-			'<th><img src="../images/day03.gif" alt="T" /></th>'+
-			'<th><img src="../images/day04.gif" alt="W" /></th>'+
-			'<th><img src="../images/day05.gif" alt="T" /></th>'+
-			'<th><img src="../images/day06.gif" alt="F" /></th>'+
-			'<th><img src="../images/day07.gif" alt="S" /></th>'+
-			'</tr>';
-        return calendar_html_code;
-    }
-	function calMoveEvtFn() {
-        //전달 클릭
-        $("#calendar").on("click", "#prev", function () {
-            nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() - 1, nowDate.getDate());
-            calendarMaker("#calendar", nowDate);
-        });
-        //다음날 클릭
-        $("#calendar").on("click", "#next", function () {
-        	nowDate = new Date(nowDate.getFullYear(), nowDate.getMonth() + 1, nowDate.getDate());
-            calendarMaker("#calendar", nowDate);
-        });
-    }
-	
 </script>
 </head>
 <body>
@@ -143,7 +64,7 @@ $(function () {
 					src="../images/main_image_03.jpg" /></a><a href="/product/sub02.jsp"><img
 					src="../images/main_image_04.jpg" /></a>
 			</div>
-
+	
 			<div class="main_contents">
 				<div class="main_con_left">
 					<p class="main_title" style="border: 0px; margin-bottom: 0px;">
@@ -363,7 +284,7 @@ $(function () {
 						<li>
 							<dl>
 								<dt>
-									<a href=""><img src="../images/g_img.gif" /></a>
+									<a href="" ><img src="../images/upload/피카츄.jpg"  style="width: 95px;height: 63px;"/></a>
 								</dt>
 								<dd>
 									<a href="">마포 구립 장애인...</a>

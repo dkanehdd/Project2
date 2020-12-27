@@ -29,7 +29,7 @@ public class FileUtil {
 		try {
 			mr = new MultipartRequest(req,
 					saveDirectory,
-					1024*1024,
+					1024*1024*1024,
 					"UTF-8",
 					new DefaultFileRenamePolicy());
 		}

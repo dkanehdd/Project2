@@ -29,7 +29,11 @@ dao.close();
 			fm.content.focus();
 			return false;
 		}
-		
+		if (!fm.attachedfile.value) {
+			alert("첨부파일을 등록해주세요");
+			fm.content.focus();
+			return false;
+		}
 	}
 </script>
 
@@ -86,10 +90,10 @@ dao.close();
 										<td><textarea rows="10" name="content" class="form-control"></textarea>
 										</td>
 									</tr>
-<!-- 									<tr> -->
-<!-- 										<th class="text-center" style="vertical-align: middle;">첨부파일</th> -->
-<!-- 										<td><input type="file" class="form-control" /></td> -->
-<!-- 									</tr> -->
+									<tr>
+										<th class="text-center" style="vertical-align: middle;">첨부파일</th>
+										<td><input type="file"  name="attachedfile" class="form-control" /></td>
+									</tr>
 								</tbody>
 							</table>
 

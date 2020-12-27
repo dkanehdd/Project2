@@ -91,15 +91,12 @@ dao.close();
 			<option value="name"
 			<%=(searchColumn!=null && searchColumn.equals("name")) ?
 					"selected":""%>>작성자</option>
-			<option value="b.id"
-			<%=(searchColumn!=null && searchColumn.equals("b.id")) ?
-					"selected":""%>>아이디</option>
 		</select>
 	</div>
 	<div class="input-group">
 		<input type="text" name="searchWord"  class="form-control"/>
 		<div class="input-group-btn">
-			<button type="submit" class="btn btn-default">
+			<button type="submit" class="btn btn-default" style="height: 34px">
 				<i class="glyphicon glyphicon-search"></i>
 			</button>
 		</div>
@@ -119,7 +116,7 @@ dao.close();
 	</colgroup>
 	
 	<thead>
-	<tr class="success">
+	<tr class="danger">
 		<th class="text-center">번호</th>
 		<th class="text-left">제목</th>
 		<th class="text-center">작성자</th>
