@@ -122,7 +122,7 @@ dao.close();
 	<thead>
 	<tr class="info">
 		<th class="text-center">번호</th>
-		<th class="text-left">제목</th>
+		<th class="text-center">제목</th>
 		<th class="text-center">작성자</th>
 		<th class="text-center">작성일</th>
 		<th class="text-center">조회수</th>

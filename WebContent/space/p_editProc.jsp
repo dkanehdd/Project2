@@ -1,8 +1,8 @@
+<%@page import="model.PhotoDAO"%>
+<%@page import="model.PhotoDTO"%>
 <%@page import="util.FileUtil"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="util.JavascriptUtil"%>
-<%@page import="model.BoardDAO"%>
-<%@page import="model.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 //폼값받기
 MultipartRequest mr = FileUtil.upload(request,
 		request.getServletContext().getRealPath("images/upload"));
-BoardDTO dto = new BoardDTO();
+PhotoDTO dto = new PhotoDTO();
 
 int affected = 0 ;
 if(mr!=null) {
@@ -31,10 +31,10 @@ if(mr!=null) {
 	dto.setContent(content);
 	dto.setTitle(title);
 	//DAO객체생성 및 연결 ...insert처리
-	BoardDAO dao = new BoardDAO();
+	PhotoDAO dao = new PhotoDAO();
 	
 	//파일업로드 성공 및 insert성공시
-	affected = dao.updateEdit(dto);
+	affected = dao.updateEdit(dto); 
 	if(affected==1 && mr.getFilesystemName("attachedfile")!=null) {
 		FileUtil.deleteFile(request, "/images/upload", originalfile);
 	}
@@ -47,12 +47,7 @@ else {
 }
 
 if(affected==1){
-	if(mr.getParameter("originalfile")==null){
-		JavascriptUtil.jsAlertLocation("수정되었습니다.", "sub03.jsp", out);
-	}
-	else{
-		JavascriptUtil.jsAlertLocation("수정되었습니다.", "sub05.jsp", out);
-	}
+	JavascriptUtil.jsAlertLocation("수정되었습니다.", "sub04.jsp", out);
 }
 else{
 	out.println(JavascriptUtil.jsAlertBack("수정실패하였습니다."));

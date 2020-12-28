@@ -21,7 +21,7 @@
        }
    </script>
    <script>
-        var isValidate = function (frm) {
+        function isValidate(frm) {
 
         	if (!frm.name.value) {
                 alert("이름을 입력하세요");

@@ -1,3 +1,4 @@
+<%@page import="util.FileUtil"%>
 <%@page import="util.JavascriptUtil"%>
 <%@page import="model.BoardDAO"%>
 <%@page import="model.BoardDTO"%>
@@ -5,8 +6,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../member/isLogin.jsp"%>
 <%
-
+request.setCharacterEncoding("UTF-8");
 String num = request.getParameter("num");
+String attachedfile = request.getParameter("attachedfile");
 
 BoardDTO dto = new BoardDTO();
 BoardDAO dao = new BoardDAO();
@@ -22,6 +24,9 @@ int affected = 0;
 if(session_id.equals(dto.getId())){
 	dto.setNum(num);//dto에 일련번호를 저장한후..
 	affected = dao.delete(num);//delete메소드 호출
+	if(attachedfile!=null){ 
+		FileUtil.deleteFile(request, "/images/upload", attachedfile);
+	}
 } 
 else{
 	//작성자 본인이 아닌경우...
@@ -34,7 +39,11 @@ if(affected==1){
 	삭제이후에는 기존 게시물이 사라지므로 리스트로 이동해서
 	삭제된 내역을 확인한다.
 	*/
-	JavascriptUtil.jsAlertLocation("삭제되었습니다.", "sub03.jsp", out);
+	if(attachedfile!=null){ 
+		JavascriptUtil.jsAlertLocation("삭제되었습니다.", "sub05.jsp", out);
+	}else{
+		JavascriptUtil.jsAlertLocation("삭제되었습니다.", "sub03.jsp", out);
+	}
 }
 else{
 	out.println(JavascriptUtil.jsAlertBack("삭제실패하였습니다."));

@@ -36,7 +36,7 @@ public class BoardDAO {
 
 			String sql = "SELECT IF(char_LENGTH(title)>20, concat(LEFT(title,20),'...'), title) AS 'title', "
 					+ "DATE_FORMAT(postdate , '%Y.%m.%d') AS pdate, num "
-					+ "FROM multi_board WHERE attachedfile is null notice=? ORDER BY num DESC LIMIT 0, 4 ";
+					+ "FROM multi_board WHERE attachedfile IS NULL and notice=? ORDER BY num DESC LIMIT 0, 4 ";
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, notice);
 			rs = psmt.executeQuery();
@@ -229,15 +229,17 @@ public class BoardDAO {
 	public int updateEdit(BoardDTO dto) {
 		int affected = 0;
 		try {
-			String query = "UPDATE multi_board SET title=?, content=? "
+			String query = "UPDATE multi_board SET title=?, content=?, attachedfile=? "
 					+ " WHERE num=? ";
 			
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getNum());
+			psmt.setString(3, dto.getAttachedfile());
+			psmt.setString(4, dto.getNum());
 			
 			affected = psmt.executeUpdate();
+			System.out.println("수정성공"+ affected);
 		}
 		catch (Exception e) {
 			System.out.println("수정하기중 예외발생");

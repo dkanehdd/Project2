@@ -1,16 +1,27 @@
+<%@page import="util.JavascriptUtil"%>
+<%@page import="model.BoardDTO"%>
+<%@page import="model.BoardDAO"%>
 <%@page import="model.MemberDAO"%>
 <%@page import="model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../member/isLogin.jsp"%>
 <%
-int nowPage = (request.getParameter("nowPage") == null || request.getParameter("nowPage").equals(""))
-	? 1
-	: Integer.parseInt(request.getParameter("nowPage"));
-String id = session.getAttribute("USER_ID").toString();
-MemberDAO dao = new MemberDAO();
-MemberDTO dto = dao.getMemberDTO(id);
+String num = request.getParameter("num");
+BoardDAO dao = new BoardDAO();
+int nowPage = (request.getParameter("nowPage")==null ||
+request.getParameter("nowPage").equals("")) ?
+		1 : Integer.parseInt(request.getParameter("nowPage"));
+//본인이 작성한 게시물이므로 조회수 증가는 의미 없엉.
+
+//일련번호에 해당하는 게시물을 DTO객체로 반환함.
+BoardDTO dto = dao.selectView(num);
 dao.close();
+//본인확인 후 작성자가 아니면 뒤로보내기
+if(!session.getAttribute("USER_ID").toString().equals(dto.getId())){
+	JavascriptUtil.jsAlertBack("작성자 본인만 수정 가능합니다.", out);
+	return;
+}
 %>
 <%@ include file="../include/global_head.jsp"%>
 <script>
@@ -26,11 +37,6 @@ dao.close();
 		}
 		if (!fm.content.value) {
 			alert("내용을 입력하세요");
-			fm.content.focus();
-			return false;
-		}
-		if (!fm.attachedfile.value) {
-			alert("첨부파일을 등록해주세요");
 			fm.content.focus();
 			return false;
 		}
@@ -58,9 +64,11 @@ dao.close();
 					</div>
 					<div>
 
-						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="WriteProc.jsp"
+						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="editProc.jsp"
 						method="post">
 							<table class="table table-bordered">
+							<input type="hidden" name="num" value="<%=num%>"/>
+							<input type="hidden" name="originalfile" value="<%=dto.getAttachedfile() %>"/>
 								<colgroup>
 									<col width="20%" />
 									<col width="*" />
@@ -83,16 +91,21 @@ dao.close();
 <!-- 									</tr> -->
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">제목</th>
-										<td><input type="text" name="title" class="form-control" /></td>
+										<td><input type="text" name="title" class="form-control" value="<%=dto.getTitle()%>"/></td>
 									</tr>
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">내용</th>
-										<td><textarea rows="10" name="content" class="form-control"></textarea>
+										<td><textarea rows="10" name="content" class="form-control"><%=dto.getContent().replace("\r\n", "<br/>") %></textarea>
 										</td>
 									</tr>
 									<tr>
+										<th class="text-center" style="vertical-align: middle;">원본파일</th>
+										<td><%=dto.getAttachedfile()%></td>
+										
+									</tr>
+									<tr>
 										<th class="text-center" style="vertical-align: middle;">첨부파일</th>
-										<td><input type="file"  name="attachedfile" class="form-control" /></td>
+										<td><input type="file" name="attachedfile" class="form-control" /></td>
 									</tr>
 								</tbody>
 							</table>

@@ -56,12 +56,12 @@ $(function () {
 			<%@ include file="../include/top.jsp"%>
 
 			<div id="main_visual">
-				<a href="/product/sub01.jsp"><img
+				<a href="../product/sub01.jsp"><img
 					src="../images/main_image_01.jpg" /></a><a
-					href="/product/sub01_02.jsp"><img
+					href="../product/sub01_02.jsp"><img
 					src="../images/main_image_02.jpg" /></a><a
-					href="/product/sub01_03.jsp"><img
-					src="../images/main_image_03.jpg" /></a><a href="/product/sub02.jsp"><img
+					href="../product/sub01_03.jsp"><img
+					src="../images/main_image_03.jpg" /></a><a href="../product/sub02.jsp"><img
 					src="../images/main_image_04.jpg" /></a>
 			</div>
 	
@@ -198,149 +198,35 @@ $(function () {
 						</table>
 					</div>
 					<div class="cal_bottom">
-						<table cellpadding="0" cellspacing="0" border="0" class="calendar">
-							<colgroup>
-								<col width="14%" />
-								<col width="14%" />
-								<col width="14%" />
-								<col width="14%" />
-								<col width="14%" />
-								<col width="14%" />
-								<col width="*" />
-							</colgroup>
-							<tr>
-								<th><img src="../images/day01.gif" alt="S" /></th>
-								<th><img src="../images/day02.gif" alt="M" /></th>
-								<th><img src="../images/day03.gif" alt="T" /></th>
-								<th><img src="../images/day04.gif" alt="W" /></th>
-								<th><img src="../images/day05.gif" alt="T" /></th>
-								<th><img src="../images/day06.gif" alt="F" /></th>
-								<th><img src="../images/day07.gif" alt="S" /></th>
-							</tr>
-							<tr>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">1</a></td>
-								<td><a href="">2</a></td>
-								<td><a href="">3</a></td>
-							</tr>
-							<tr>
-								<td><a href="">4</a></td>
-								<td><a href="">5</a></td>
-								<td><a href="">6</a></td>
-								<td><a href="">7</a></td>
-								<td><a href="">8</a></td>
-								<td><a href="">9</a></td>
-								<td><a href="">10</a></td>
-							</tr>
-							<tr>
-								<td><a href="">11</a></td>
-								<td><a href="">12</a></td>
-								<td><a href="">13</a></td>
-								<td><a href="">14</a></td>
-								<td><a href="">15</a></td>
-								<td><a href="">16</a></td>
-								<td><a href="">17</a></td>
-							</tr>
-							<tr>
-								<td><a href="">18</a></td>
-								<td><a href="">19</a></td>
-								<td><a href="">20</a></td>
-								<td><a href="">21</a></td>
-								<td><a href="">22</a></td>
-								<td><a href="">23</a></td>
-								<td><a href="">24</a></td>
-							</tr>
-							<tr>
-								<td><a href="">25</a></td>
-								<td><a href="">26</a></td>
-								<td><a href="">27</a></td>
-								<td><a href="">28</a></td>
-								<td><a href="">29</a></td>
-								<td><a href="">30</a></td>
-								<td><a href="">31</a></td>
-							</tr>
-							<tr>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-								<td><a href="">&nbsp;</a></td>
-							</tr>
-						</table>
+					<!-- 메인 달력 출력부분 -->
 					</div>
 				</div>
 				<div class="main_con_right">
 					<p class="main_title">
 						<img src="../images/main_title06.gif" alt="사진게시판 PHOTO BOARD" /><a
-							href="/space/sub04.jsp"><img src="../images/more.gif"
+							href="../space/sub04.jsp"><img src="../images/more.gif"
 							alt="more" class="more_btn" /></a>
 					</p>
 					<ul class="main_photo_list">
-						<li>
-							<dl>
-								<dt>
-									<a href="" ><img src="../images/upload/피카츄.jpg"  style="width: 95px;height: 63px;"/></a>
-								</dt>
-								<dd>
-									<a href="">마포 구립 장애인...</a>
-								</dd>
-							</dl>
-						</li>
-						<li>
-							<dl>
-								<dt>
-									<a href=""><img src="../images/g_img.gif" /></a>
-								</dt>
-								<dd>
-									<a href="">마포 구립 장애인...</a>
-								</dd>
-							</dl>
-						</li>
-						<li>
-							<dl>
-								<dt>
-									<a href=""><img src="../images/g_img.gif" /></a>
-								</dt>
-								<dd>
-									<a href="">마포 구립 장애인...</a>
-								</dd>
-							</dl>
-						</li>
-						<li>
-							<dl>
-								<dt>
-									<a href=""><img src="../images/g_img.gif" /></a>
-								</dt>
-								<dd>
-									<a href="">마포 구립 장애인...</a>
-								</dd>
-							</dl>
-						</li>
-						<li>
-							<dl>
-								<dt>
-									<a href=""><img src="../images/g_img.gif" /></a>
-								</dt>
-								<dd>
-									<a href="">마포 구립 장애인...</a>
-								</dd>
-							</dl>
-						</li>
-						<li>
-							<dl>
-								<dt>
-									<a href=""><img src="../images/g_img.gif" /></a>
-								</dt>
-								<dd>
-									<a href="">마포 구립 장애인...</a>
-								</dd>
-							</dl>
-						</li>
+					<c:choose>
+						<c:when test="${empty plist }">
+							<li>등록된 게시물이 없습니다.</li>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${plist }" var="pic" varStatus="loop">
+								<li>
+								<dl>
+									<dt>
+										<a href="" ><img src="/Project2/images/upload/${pic.attachedfile }"  style="width: 95px;height: 63px;"/></a>
+									</dt>
+									<dd>
+										<a href="">${pic.title }</a>
+									</dd>
+								</dl>
+								</li>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 					</ul>
 				</div>
 			</div>

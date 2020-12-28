@@ -50,15 +50,15 @@ dao.close();
 				</div>
 				<div class="right_contents">
 					<div class="top_title">
-						<img src="../images/space/sub05_title.gif" alt="정보자료실"
+						<img src="../images/space/sub04_title.gif" alt="사진게시판"
 							class="con_title" />
 						<p class="location">
-							<img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;정보자료실
+							<img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;사진게시판
 						<p>
 					</div>
 					<div>
 
-						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="WriteProc.jsp"
+						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="PWriteProc.jsp"
 						method="post">
 							<table class="table table-bordered">
 								<colgroup>
@@ -103,10 +103,9 @@ dao.close();
 								<button type="submit" class="btn btn-danger">전송하기</button>
 								<!-- 	<button type="reset" class="btn">Reset</button> -->
 								<button type="button" class="btn btn-warning"
-									onclick="location.href='sub05.jsp?nowPage=<%=nowPage%>';">리스트보기</button>
+									onclick="location.href='sub04.jsp?nowPage=<%=nowPage%>';">리스트보기</button>
 							</div>
 						</form>
-
 					</div>
 				</div>
 			</div>
