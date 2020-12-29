@@ -94,7 +94,7 @@ dao.close();
 								<button type="button" class="btn btn-info p-1 ml-3"
 									onclick="location.href='sub04_edit.jsp?num=<%=num%>'">수정하기</button>
 								<button type="button" class="btn btn-danger mr-auto"
-									onclick="location.href='deleteProc.jsp?num=<%=num%>&attachedfile=<%=dto.getAttachedfile()%>'">삭제하기</button>
+									onclick="location.href='p_deleteProc.jsp?num=<%=num%>&attachedfile=<%=dto.getAttachedfile()%>'">삭제하기</button>
 								<%
 									}
 								%>

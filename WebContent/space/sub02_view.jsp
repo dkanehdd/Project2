@@ -1,32 +1,18 @@
-<%@page import="model.BoardDTO"%>
-<%@page import="model.BoardDAO"%>
+<%@page import="model.CalenderDTO"%>
+<%@page import="model.CalenderDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
 <%
-String queryStr="";
-String searchColumn = request.getParameter("searchColumn");
-String searchWord = request.getParameter("searchWord");
-if(searchWord!=null&&!searchWord.equals("")){
-	queryStr += "searchColumn="+searchColumn
-			+"&searchWord="+searchWord;
-}
-String nowPage = request.getParameter("nowPage")==null?"1":request.getParameter("nowPage");
-queryStr += "&nowPage="+nowPage;
-String sortColumn = request.getParameter("sortColumn");
-if(sortColumn!=null){
-	queryStr += "&sortColumn="+sortColumn+"&";
-}
 //파라미터로 전송된 게시물의 일련번호를 받음
 String num = request.getParameter("num");
 
-BoardDAO dao = new BoardDAO();
+CalenderDAO dao = new CalenderDAO();
 //조회수를 업데이트하여 visitcount컬럼을 1증가시킴
-dao.updateVisitCount(num); 
 
 //일련번호에 해당하는 게시물을 DTO객체로 반환함.
-BoardDTO dto = dao.selectView(num);
-
+CalenderDTO dto = dao.selectView(num); 
+ 
 dao.close();
 %>
 
@@ -43,8 +29,8 @@ dao.close();
 			</div>
 			<div class="right_contents">
 				<div class="top_title">
-					<img src="../images/space/sub01_title.gif" alt="공지사항" class="con_title" />
-					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;공지사항<p>
+					<img src="../images/space/sub02_title.gif" alt="프로그램일정" class="con_title" />
+					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;프로그램일정<p>
 				</div>
 				<div>
 
@@ -66,19 +52,7 @@ dao.close();
 		<th class="text-center" 
 			style="vertical-align:middle;">작성일</th>
 		<td>
-			<%=dto.getPostdate() %>
-		</td>
-	</tr>
-	<tr>
-		<th class="text-center" 
-			style="vertical-align:middle;">이메일</th>
-		<td>
-			<%=dto.getEmail() %>
-		</td>
-		<th class="text-center" 
-			style="vertical-align:middle;">조회수</th>
-		<td>
-			<%=dto.getVisitcount() %>
+			<%=dto.getPdate() %>
 		</td>
 	</tr>
 	<tr>
@@ -92,7 +66,7 @@ dao.close();
 		<th class="text-center" 
 			style="vertical-align:middle;">내용</th>
 		<td colspan="3">
-			<%=dto.getContent().replace("\r\n", "<br/>") %> 
+			<%=dto.getContents().replace("\r\n", "<br/>") %> 
 		</td>
 	</tr>
 	
@@ -104,7 +78,7 @@ dao.close();
 <!-- 	<button type="button" class="btn btn-primary">수정하기</button> -->
 <!-- 	<button type="button" class="btn btn-success">삭제하기</button>	 -->
 	<button type="button" class="btn btn-warning" 
-					onclick="location.href='sub01.jsp?<%=queryStr%>';">리스트보기</button>
+					onclick="location.href='sub01.jsp';">리스트보기</button>
 </div>
 </form> 
 

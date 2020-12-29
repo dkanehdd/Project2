@@ -24,11 +24,11 @@ public class PagingUtil {
 			//무조건 첫페이지로(페이지번호를 1로 설정한다.)
 			pagingStr += "<li class='page-item'><a href='"+pageName+"nowPage=1'"
 					+ " class='page-link'>"
-					+ "<i class=\"fas fa-angle-double-left\"></i></a></li>";
+					+ "<i class=\"fas fa-angle-double-left\" style='height: 17px'></i></a></li>";
 			//이전블록으로
 			pagingStr += "<li class='page-item'><a href='"+pageName+"nowPage="+
 						(intTemp-1)+"' class='page-link'>"
-					+ "<i class=\"fas fa-angle-left\"></i></a></li>";
+					+ "<i class=\"fas fa-angle-left\" style='height: 17px'></i></a></li>";
 		}
 		int blockCount = 1;
 		while(blockCount<=blockPage && intTemp<=totalPage) {
@@ -51,11 +51,11 @@ public class PagingUtil {
 			//다음 페이지 블록으로 이동
 			pagingStr += "<li class='page-item'><a href='"+pageName + "nowPage="+ intTemp+"'"
 					+ " class='page-link'>"
-					+ "<i class=\"fas fa-angle-right\"></i></a></li>";
+					+ "<i class=\"fas fa-angle-right\" style='height: 17px'></i></a></li>";
 			//totalPage를 이용 마지막 페이지로 
 			pagingStr+= "<li class='page-item'><a href='"+pageName+"nowPage="+totalPage+"'"
 							+ " class='page-link'>"
-					+ "<i class=\"fas fa-angle-double-right\"></i></a></li>";
+					+ "<i class=\"fas fa-angle-double-right\" style='height: 17px'></i></a></li>";
 		}
 		return pagingStr;
 	}

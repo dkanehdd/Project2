@@ -182,7 +182,7 @@ dao.close();
 						</div>
 						<div class="row text-center">
 							<!-- 페이지번호 부분 -->
-							<ul class="pagination pager">
+							<ul class="pagination">
 								<%=PagingUtil.pagingBS4(totalRecordCount, pageSize, blockPage, nowPage, "sub03.jsp?" + queryStr)%>
 							</ul>
 						</div>

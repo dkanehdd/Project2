@@ -217,10 +217,10 @@ $(function () {
 								<li>
 								<dl>
 									<dt>
-										<a href="" ><img src="/Project2/images/upload/${pic.attachedfile }"  style="width: 95px;height: 63px;"/></a>
+										<a href="../space/sub04_view.jsp?num=${pic.num }" ><img src="/Project2/images/upload/${pic.attachedfile }"  style="width: 95px;height: 63px;"/></a>
 									</dt>
 									<dd>
-										<a href="">${pic.title }</a>
+										<a href="../space/sub04_view.jsp?num=${pic.num }">${pic.title }</a>
 									</dd>
 								</dl>
 								</li>
