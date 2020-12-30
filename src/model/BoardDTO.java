@@ -7,10 +7,16 @@ public class BoardDTO {
 	private String content;
 	private String postdate;
 	private String id;
-	private String notice;
 	private String attachedfile;
 	private String name;
 	private String email;
+	private String flag;
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -52,12 +58,6 @@ public class BoardDTO {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getNotice() {
-		return notice;
-	}
-	public void setNotice(String notice) {
-		this.notice = notice;
 	}
 	public String getAttachedfile() {
 		return attachedfile;

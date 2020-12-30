@@ -2,17 +2,7 @@
 <%@page import="model.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../member/isLogin.jsp"%>
-<%
-int nowPage = (request.getParameter("nowPage") == null || request.getParameter("nowPage").equals(""))
-	? 1
-	: Integer.parseInt(request.getParameter("nowPage"));
-String id = session.getAttribute("USER_ID").toString();
-String flag = request.getParameter("flag");
-MemberDAO dao = new MemberDAO();
-MemberDTO dto = dao.getMemberDTO(id);
-dao.close();
-%>
+<%@ include file="../member/isAdminLogin.jsp"%>
 <%@ include file="../include/global_head.jsp"%>
 <script>
 	/*연습문제] 글쓰기 폼에 빈값이 있는경우 서버로 전송되지 않도록 
@@ -43,25 +33,27 @@ dao.close();
 		<div id="wrap">
 			<%@ include file="../include/top.jsp"%>
 
-			<img src="../images/space/sub_image.jpg" id="main_visual" />
+			<img src="../images/community/sub_image.jpg" id="main_visual" />
 
 			<div class="contents_box">
 				<div class="left_contents">
-					<%@ include file="../include/space_leftmenu.jsp"%>
+					<%@ include file="../include/community_leftmenu.jsp"%>
 				</div>
 				<div class="right_contents">
 					<div class="top_title">
-						<img src="../images/space/sub04_title.gif" alt="사진게시판"
+						<img src="../images/community/sub01_title.gif" alt="직원자료실"
 							class="con_title" />
 						<p class="location">
-							<img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;사진게시판
+							<img src="../images/center/house.gif" />&nbsp;&nbsp;열린공간&nbsp;>&nbsp;직원자료실
 						<p>
 					</div>
 					<div>
-
-						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="WriteProc.jsp"
+  
+						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="../community/write"
 						method="post">
-						<input type="hidden" name="flag" value="<%=flag%>"/>
+							<input type="hidden" name="flag" value="${flag }"/>
+							
+							<input type="hidden" name="id" value="${dto.id }"/>
 							<table class="table table-bordered">
 								<colgroup>
 									<col width="20%" />
@@ -71,12 +63,12 @@ dao.close();
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">작성자</th>
 										<td><input type="text" class="form-control"
-											style="width: 100px;" value="<%=dto.getName() %>" readonly="readonly"/></td>
+											style="width: 100px;" value="${dto.name }" readonly="readonly"/></td>
 									</tr>
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">이메일</th>
 										<td><input type="text" class="form-control"
-											style="width: 400px;" value="<%=dto.getEmail() %>" readonly="readonly"/></td>
+											style="width: 400px;" value="${dto.email }" readonly="readonly"/></td>
 									</tr>
 <!-- 									<tr> -->
 <!-- 										<th class="text-center" style="vertical-align: middle;">패스워드</th> -->
@@ -105,7 +97,7 @@ dao.close();
 								<button type="submit" class="btn btn-danger">전송하기</button>
 								<!-- 	<button type="reset" class="btn">Reset</button> -->
 								<button type="button" class="btn btn-warning"
-									onclick="location.href='sub04.jsp?nowPage=<%=nowPage%>&flag=<%=flag%>';">리스트보기</button>
+									onclick="location.href='../community/sub.do?flag=admin';">리스트보기</button>
 							</div>
 						</form>
 					</div>

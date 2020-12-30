@@ -1,26 +1,31 @@
-<%@page import="model.PhotoDTO"%>
-<%@page import="model.PhotoDAO"%>
+<%@page import="model.BoardDTO"%>
+<%@page import="model.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp"%>
 <%
-	String queryStr = "";
+String queryStr="";
 String searchColumn = request.getParameter("searchColumn");
 String searchWord = request.getParameter("searchWord");
-if (searchWord != null && !searchWord.equals("")) {
-	queryStr += "searchColumn=" + searchColumn + "&searchWord=" + searchWord;
+if(searchWord!=null&&!searchWord.equals("")){
+	queryStr += "searchColumn="+searchColumn
+			+"&searchWord="+searchWord;
 }
-String nowPage = request.getParameter("nowPage") == null ? "1" : request.getParameter("nowPage");
-queryStr += "&nowPage=" + nowPage;
+String nowPage = request.getParameter("nowPage")==null?"1":request.getParameter("nowPage");
+queryStr += "&nowPage="+nowPage;
+String sortColumn = request.getParameter("sortColumn");
+if(sortColumn!=null){
+	queryStr += "&sortColumn="+sortColumn+"&";
+}
 //파라미터로 전송된 게시물의 일련번호를 받음
 String num = request.getParameter("num");
 
-PhotoDAO dao = new PhotoDAO();
+BoardDAO dao = new BoardDAO();
 //조회수를 업데이트하여 visitcount컬럼을 1증가시킴
-dao.updateVisitCount(num);
+dao.updateVisitCount(num); 
 
 //일련번호에 해당하는 게시물을 DTO객체로 반환함.
-PhotoDTO dto = dao.selectView(num);
+BoardDTO dto = dao.selectView(num);
 
 dao.close();
 %>
@@ -94,12 +99,12 @@ dao.close();
 								<button type="button" class="btn btn-info p-1 ml-3"
 									onclick="location.href='sub04_edit.jsp?num=<%=num%>'">수정하기</button>
 								<button type="button" class="btn btn-danger mr-auto"
-									onclick="location.href='p_deleteProc.jsp?num=<%=num%>&attachedfile=<%=dto.getAttachedfile()%>'">삭제하기</button>
+									onclick="location.href='deleteProc.jsp?num=<%=num%>&attachedfile=<%=dto.getAttachedfile()%>&flag=<%=dto.getFlag()%>'">삭제하기</button>
 								<%
 									}
 								%>
 								<button type="button" class="btn btn-warning ml-auto mr-3"
-									onclick="location.href='sub04.jsp?<%=queryStr%>';">리스트보기</button>
+									onclick="location.href='sub01_list.jsp?<%=queryStr%>&flag=<%=dto.getFlag()%>';">리스트보기</button>
 							</div>
 						</form>
 

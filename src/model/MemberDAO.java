@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -67,7 +69,7 @@ public class MemberDAO {
 		// 회원정보를 저장할 Map컬렉션 생성
 		MemberDTO dto = new MemberDTO();
 
-		String query = "SELECT id, name, email FROM membership" + " where id=?";
+		String query = "SELECT * FROM membership" + " where id=?";
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, id);
@@ -77,7 +79,12 @@ public class MemberDAO {
 			if (rs.next()) {
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
+				dto.setPass(rs.getString("pass"));
 				dto.setEmail(rs.getString("email"));
+				dto.setTelephone(rs.getString("telephone"));
+				dto.setCellphone(rs.getString("cellphone"));
+				dto.setAdmin(rs.getString("admin"));
+				dto.setAddress(rs.getString("address"));
 			} else {
 				System.out.println("결과셋이 없습니다.");
 			}
@@ -178,6 +185,7 @@ public class MemberDAO {
 			if(rs!=null) rs.close();
 			if(psmt!=null) psmt.close();
 			if(con!=null) con.close();
+			System.out.println("자원반납");
 		}
 		catch (Exception e) {
 			System.out.println("자원반납시 예외발생");
@@ -221,5 +229,74 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 		return pass;
+	}
+	
+	public String adminCheck(String id) {
+		String admin = "";
+		try {
+			String sql = "SELECT admin FROM membership WHERE id=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			rs.next();
+			admin = rs.getString(1);
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return admin;
+	}
+	public List<MemberDTO> selectAll(Map<String, Object> map){
+		List<MemberDTO> list = new Vector<MemberDTO>();
+		try {
+			String sql = "SELECT * FROM membership ";
+			if (map.get("Word") != null) {
+				sql += " where " + map.get("Column") + " LIKE '%" + map.get("Word") + "%'";
+			}
+			sql += "ORDER BY regidate desc";
+			psmt = con.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			System.out.println(sql);
+			while(rs.next()) {
+				MemberDTO dto = new MemberDTO();
+				dto.setName(rs.getString("name"));
+				dto.setId(rs.getString("id"));
+				dto.setEmail(rs.getString("email"));
+				dto.setAdmin(rs.getString("admin"));
+				dto.setCellphone(rs.getString("cellphone"));
+				dto.setAdmin(rs.getString("admin"));
+				list.add(dto);		
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public int editMember(MemberDTO dto) {
+		int affected = 0;
+		try {
+			String query = "UPDATE membership SET name=?, pass=?, email=?, admin=?,"
+					+ " telephone=?, cellphone=? "
+					+ " WHERE id=? ";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getName());
+			psmt.setString(2, dto.getPass());
+			psmt.setString(3, dto.getEmail());
+			psmt.setString(4, dto.getAdmin());
+			psmt.setString(5, dto.getTelephone());
+			psmt.setString(6, dto.getCellphone());
+			psmt.setString(7, dto.getId());
+			
+			affected = psmt.executeUpdate();
+			System.out.println("수정성공"+ affected);
+		}
+		catch (Exception e) {
+			System.out.println("수정하기중 예외발생");
+			e.printStackTrace();
+		}
+		return affected;
 	}
 }

@@ -65,9 +65,11 @@ if(!session.getAttribute("USER_ID").toString().equals(dto.getId())){
 					</div>
 					<div>
 
-						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="editProc.jsp">
+						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="editProc.jsp"
+						method="post">
 							<table class="table table-bordered">
 							<input type="hidden" name="num" value="<%=num%>"/>
+							<input type="hidden" name="flag" value="<%=dto.getFlag()%>"/>
 								<colgroup>
 									<col width="20%" />
 									<col width="*" />
@@ -110,7 +112,7 @@ if(!session.getAttribute("USER_ID").toString().equals(dto.getId())){
 								<button type="submit" class="btn btn-danger">전송하기</button>
 								<!-- 	<button type="reset" class="btn">Reset</button> -->
 								<button type="button" class="btn btn-warning"
-									onclick="location.href='sub03.jsp?nowPage=<%=nowPage%>';">리스트보기</button>
+									onclick="location.href='sub01_list.jsp?flag=<%=dto.getFlag()%>';">리스트보기</button>
 							</div>
 						</form>
 

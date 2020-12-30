@@ -11,7 +11,7 @@
 BoardDAO dao = new BoardDAO();
 
 Map<String, Object> param = new HashMap<String, Object>();
-param.put("notice", "F");
+param.put("flag", "free");
 String queryStr = "";
 
 String searchColumn = request.getParameter("searchColumn");
@@ -172,7 +172,7 @@ dao.close();
 							<!-- <button type="reset" class="btn">Reset</button> -->
 
 							<button type="button" class="btn btn-default"
-								onclick="location.href='sub03_write.jsp';">글쓰기</button>
+								onclick="location.href='sub03_write.jsp?flag=<%=param.get("flag")%>';">글쓰기</button>
 
 							<!-- <button type="button" class="btn btn-primary">수정하기</button>
 	<button type="button" class="btn btn-success">삭제하기</button>

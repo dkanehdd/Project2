@@ -114,10 +114,10 @@ dao.close();
 		session.getAttribute("USER_ID").toString().equals(dto.getId())){
 	%>
 	<button type="button" class="btn btn-info p-1 ml-3" onclick="location.href='sub03_edit.jsp?num=<%=num%>'">수정하기</button>
-	<button type="button" class="btn btn-danger mr-auto" onclick="location.href='deleteProc.jsp?num=<%=num%>'">삭제하기</button>	
+	<button type="button" class="btn btn-danger mr-auto" onclick="location.href='deleteProc.jsp?num=<%=num%>&flag=<%=dto.getFlag()%>'">삭제하기</button>	
 	<%}%>
 	<button type="button" class="btn btn-warning ml-auto mr-3" 
-					onclick="location.href='sub03.jsp?<%=queryStr%>';">리스트보기</button>
+					onclick="location.href='sub01_list.jsp?<%=queryStr%>&flag=<%=dto.getFlag()%>';">리스트보기</button>
 </div>
 </form> 
 

@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 BoardDAO dao = new BoardDAO();
  
 Map<String, Object> param = new HashMap<String, Object>();
-param.put("notice", "F");
+param.put("flag", "dataroom");
 String queryStr = "";
 
 String searchColumn = request.getParameter("searchColumn");
@@ -28,7 +28,7 @@ if(sortColumn!=null){
 	param.put("Sort", sortColumn);
 	queryStr += "&sortColumn="+sortColumn+"&";
 }
-int totalRecordCount = dao.getTotalFileRecordCountSearch(param);// join O
+int totalRecordCount = dao.getTotalRecordCountSearch(param);// join O
  
 /*********** 페이지처리를 위한 코드 추가 start ************/
 //한페이지에 출력할 레코드의 갯수 : 10
@@ -51,7 +51,7 @@ int end = pageSize;
 param.put("start", start);
 param.put("end", end);
 
-List<BoardDTO> lists = dao.selectFileListPageSearch(param);
+List<BoardDTO> lists = dao.selectListPageSearch(param);
 //DB자원해제
 dao.close();
 %>
@@ -180,7 +180,7 @@ else{
 							<!-- <button type="reset" class="btn">Reset</button> -->
 
 							<button type="button" class="btn btn-default"
-								onclick="location.href='sub05_write.jsp';">글쓰기</button>
+								onclick="location.href='sub05_write.jsp?flag=<%=param.get("flag")%>';">글쓰기</button>
 
 							<!-- <button type="button" class="btn btn-primary">수정하기</button>
 	<button type="button" class="btn btn-success">삭제하기</button>

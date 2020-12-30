@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 BoardDAO dao = new BoardDAO();
  
 Map<String, Object> param = new HashMap<String, Object>();
-param.put("notice", "T");
+param.put("flag", "notice");
 String queryStr = "";
 
 String searchColumn = request.getParameter("searchColumn");

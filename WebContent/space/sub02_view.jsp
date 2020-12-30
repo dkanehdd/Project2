@@ -78,7 +78,7 @@ dao.close();
 <!-- 	<button type="button" class="btn btn-primary">수정하기</button> -->
 <!-- 	<button type="button" class="btn btn-success">삭제하기</button>	 -->
 	<button type="button" class="btn btn-warning" 
-					onclick="location.href='sub01.jsp';">리스트보기</button>
+					onclick="location.href='sub02.jsp';">리스트보기</button>
 </div>
 </form> 
 

@@ -1,16 +1,17 @@
+<%@page import="model.BoardDTO"%>
+<%@page import="model.BoardDAO"%>
 <%@page import="util.PagingUtil"%>
-<%@page import="model.PhotoDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="model.PhotoDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("UTF-8");
-PhotoDAO dao = new PhotoDAO();
+BoardDAO dao = new BoardDAO();
 
 Map<String, Object> param = new HashMap<String, Object>();
+param.put("flag", "photo");
 String queryStr = "";
 
 String searchColumn = request.getParameter("searchColumn");
@@ -43,7 +44,7 @@ int end = pageSize;
 param.put("start", start);
 param.put("end", end);
 
-List<PhotoDTO> lists = dao.selectListPageSearch(param);
+List<BoardDTO> lists = dao.selectListPageSearch(param);
 //DB자원해제
 dao.close();
 %>
@@ -113,7 +114,7 @@ dao.close();
 							int vNum = 0;//게시물의 가상번호로 사용할 변수
 							int countNum = 0;
 
-							for (PhotoDTO dto : lists) {
+							for (BoardDTO dto : lists) {
 							%>
 							<!-- 리스트반복 -->
 							<div class="thumbnail col-md-3"
@@ -141,7 +142,7 @@ dao.close();
 							<!-- <button type="reset" class="btn">Reset</button> -->
 
 							<button type="button" class="btn btn-info"
-								onclick="location.href='sub04_write.jsp';">글쓰기</button>
+								onclick="location.href='sub04_write.jsp?flag=<%=param.get("flag")%>';">글쓰기</button>
 
 							<!-- <button type="button" class="btn btn-primary">수정하기</button>
 	<button type="button" class="btn btn-success">삭제하기</button>

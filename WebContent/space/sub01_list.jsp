@@ -1,6 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String flag = request.getParameter("flag");
 
+if(flag.equals("free")){
+	response.sendRedirect("./sub03.jsp");
+}
+else if(flag.equals("photo")){
+	response.sendRedirect("./sub04.jsp");
+}
+else if(flag.equals("dataroom")){
+	response.sendRedirect("./sub05.jsp");
+}
+else{
+	response.sendRedirect("./sub01.jsp");
+}
+
+%>
 <%@ include file="../include/global_head.jsp" %>
 
 

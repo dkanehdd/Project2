@@ -8,6 +8,7 @@ int nowPage = (request.getParameter("nowPage") == null || request.getParameter("
 	? 1
 	: Integer.parseInt(request.getParameter("nowPage"));
 String id = session.getAttribute("USER_ID").toString();
+String flag = request.getParameter("flag");
 MemberDAO dao = new MemberDAO();
 MemberDTO dto = dao.getMemberDTO(id);
 dao.close();
@@ -60,6 +61,7 @@ dao.close();
 
 						<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="WriteProc.jsp"
 						method="post">
+						<input type="hidden" name="flag" value="<%=flag%>"/>
 							<table class="table table-bordered">
 								<colgroup>
 									<col width="20%" />
@@ -103,7 +105,7 @@ dao.close();
 								<button type="submit" class="btn btn-danger">전송하기</button>
 								<!-- 	<button type="reset" class="btn">Reset</button> -->
 								<button type="button" class="btn btn-warning"
-									onclick="location.href='sub05.jsp?nowPage=<%=nowPage%>';">리스트보기</button>
+									onclick="location.href='sub05.jsp?nowPage=<%=nowPage%>&flag=<%=flag%>';">리스트보기</button>
 							</div>
 						</form>
 

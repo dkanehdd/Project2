@@ -1,3 +1,4 @@
+<%@page import="model.MemberDAO"%>
 <%@page import="model.CalenderDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="model.CalenderDAO"%>
@@ -55,19 +56,14 @@
 						<p>
 					</div>
 					<div class="row">
-						<table border=0>
+						<div class="row" style="text-align: center; font-size: 2em">
 							<!-- 달력 상단 부분, 더 좋은 방법이 없을까? -->
-							<tr style="text-align:justify;">
-								<td align=center>
-									<a href="sub02.jsp">오늘날짜로 이동</a>
-								<a
-									href="sub02.jsp?year=<%=year - 1%>&month=<%=month%>">◀◀</a> <a
-									href="sub02.jsp?year=<%=year%>&month=<%=month - 1%>">◀</a> <%=year%>년
-									<%=month + 1%>월 <a
-									href="sub02.jsp?year=<%=year%>&month=<%=month + 1%>">▶</a> <a
-									href="sub02.jsp?year=<%=year + 1%>&month=<%=month%>">▶▶</a></td>
-							</tr>
-						</table>
+						<a href="sub02.jsp?year=<%=year - 1%>&month=<%=month%>"><span class="glyphicon glyphicon-backward"></span></a>
+						<a href="sub02.jsp?year=<%=year%>&month=<%=month - 1%>"><span class="glyphicon glyphicon-triangle-left"></span></a> 
+						<%=year%>년 <%=month + 1%>월 
+						<a href="sub02.jsp?year=<%=year%>&month=<%=month + 1%>"><span class="glyphicon glyphicon-triangle-right"></span></a> 
+						<a href="sub02.jsp?year=<%=year + 1%>&month=<%=month%>"><span class="glyphicon glyphicon-forward"></span></a>
+						</div>
 						<table border=1 cellspacing=0 style="padding: 5px">
 							<!-- 달력 부분 -->
 							<tr style="text-align: center; background-color: #fdfac3;font-weight: bold;" height="30">
@@ -105,8 +101,9 @@
 									else out.println("<td style='padding: 5px;'>" + i + "<br>");
 									//메모(일정) 추가 부분
 									for (CalenderDTO dto : list) {
-										if (Integer.parseInt(dto.getC_day()) == i) {
-											out.println(dto.getTitle() + "<br>");
+										if (Integer.parseInt(dto.getC_day()) == i) {%>
+											<a href="sub02_view.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle() %></a><br />
+										<%
 										}
 									}
 	
@@ -119,11 +116,10 @@
 								while ((br++) % 7 != 0) //말일 이후 빈칸출력
 								out.println("<td>&nbsp;</td>");
 								%>
-							</tr>
+							</tr> 
 						</table>
-
-
 					</div>
+					
 				</div>
 			</div>
 			<%@ include file="../include/quick.jsp"%>

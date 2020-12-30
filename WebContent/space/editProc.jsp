@@ -12,7 +12,7 @@ request.setCharacterEncoding("UTF-8");
 MultipartRequest mr = FileUtil.upload(request,
 		request.getServletContext().getRealPath("images/upload"));
 BoardDTO dto = new BoardDTO();
-
+String flag = mr.getParameter("flag");
 int affected = 0 ;
 if(mr!=null) {
 	//파일업로드가 완료되면 나머지 폼값을 받기위해 mr참조변수를 이용한다.
@@ -47,12 +47,10 @@ else {
 }
 
 if(affected==1){
-	if(mr.getParameter("originalfile")==null){
-		JavascriptUtil.jsAlertLocation("수정되었습니다.", "sub03.jsp", out);
-	}
-	else{
-		JavascriptUtil.jsAlertLocation("수정되었습니다.", "sub05.jsp", out);
-	}
+	
+	JavascriptUtil.jsAlertLocation("수정되었습니다.", "sub01_list.jsp?flag="+flag, out);
+	
+	
 }
 else{
 	out.println(JavascriptUtil.jsAlertBack("수정실패하였습니다."));

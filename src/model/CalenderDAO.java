@@ -42,7 +42,7 @@ public class CalenderDAO {
 				dto.setTitle(rs.getString("title"));
 				dto.setContents(rs.getString("contents"));
 				dto.setC_day(rs.getString("c_day"));
-				
+				dto.setNum(rs.getString("num"));
 				list.add(dto);
 			}
 		}
@@ -62,6 +62,7 @@ public class CalenderDAO {
 				psmt.close();
 			if (con != null)
 				con.close();
+			System.out.println("자원반납");
 		} catch (Exception e) {
 			System.out.println("자원반납시 예외발생");
 		}
@@ -70,7 +71,7 @@ public class CalenderDAO {
 	public CalenderDTO selectView(String num) {
 
 		CalenderDTO dto = new CalenderDTO();
-		String query = "SELECT CONCAT(c_year,'-', c_month,'-', c_day) pdate, title, contents, b.id, name "
+		String query = "SELECT CONCAT(c_year,'-', c_month,'-', c_day) pdate, title, contents, b.id, name,num "
 				+ "FROM calendarmemo b " + 
 				"				INNER JOIN membership m " + 
 				"				ON b.id=m.id"
@@ -92,5 +93,28 @@ public class CalenderDAO {
 			e.printStackTrace();
 		}
 		return dto;
+	}
+	
+	public int insertCal(CalenderDTO dto) {
+		int affected = 0;
+		try {
+			String sql = "INSERT INTO calendarmemo (title, contents, c_year, c_month, c_day, id)" + 
+					"VALUES(?, ?,?,?,?,?);";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContents());
+			psmt.setString(3, dto.getC_year());
+			psmt.setString(4, dto.getC_month());
+			psmt.setString(5, dto.getC_day());
+			psmt.setString(6, dto.getId());
+			
+			affected = psmt.executeUpdate();
+			System.out.println("입력성공");
+		}
+		catch (Exception e) {
+			System.out.println("일정 입력중 예외");
+			e.printStackTrace();
+		}
+		return affected;
 	}
 }

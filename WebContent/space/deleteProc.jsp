@@ -18,7 +18,7 @@ dto = dao.selectView(num);
 //세션영역에 저장된 로그인 아이디를 String형으로 가져온다.
 String session_id = session.getAttribute("USER_ID").toString();//방법1
 //String session_id = (String)session.getAttribute("USER_ID");//방법2
-
+String flag = request.getParameter("flag");
 int affected = 0;
 //작성자 본인 확인을 위해 DB에 입력된 작성자와 세션영역에 저장된 속성을 비교한다.
 if(session_id.equals(dto.getId())){
@@ -39,11 +39,9 @@ if(affected==1){
 	삭제이후에는 기존 게시물이 사라지므로 리스트로 이동해서
 	삭제된 내역을 확인한다.
 	*/
-	if(attachedfile!=null){ 
-		JavascriptUtil.jsAlertLocation("삭제되었습니다.", "sub05.jsp", out);
-	}else{
-		JavascriptUtil.jsAlertLocation("삭제되었습니다.", "sub03.jsp", out);
-	}
+	
+	JavascriptUtil.jsAlertLocation("삭제되었습니다.", "sub01_list.jsp?flag="+flag, out);
+	
 }
 else{
 	out.println(JavascriptUtil.jsAlertBack("삭제실패하였습니다."));
