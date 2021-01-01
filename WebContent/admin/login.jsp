@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Login</title>
+  <title>관리자모드</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,17 +25,17 @@
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">관리자모드 로그인</div>
+      <div class="card-header">관리자모드</div>
       <div class="card-body">
         <form action="./LoginProc.jsp">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" name="user_id" class="form-control" placeholder="아이디" autofocus="autofocus">
+              <input type="text" name="user_id" class="form-control" placeholder="ìì´ë" autofocus="autofocus">
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" name="user_pw" class="form-control" placeholder="비밀번호" >
+              <input type="password" name="user_pw" class="form-control" placeholder="ë¹ë°ë²í¸" >
             </div>
           </div>
           <button class="btn btn-primary btn-block" type="submit">로그인</button>

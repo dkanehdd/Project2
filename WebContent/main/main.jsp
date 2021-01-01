@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 	//리퀘스트 내장객체를 이용해서 생성된 쿠키를 가져온다.
 Cookie[] cookies = request.getCookies();
@@ -48,6 +49,13 @@ $(function () {
 		} //호출시 함수명만 명시한다.
 	});
 });
+</script>
+<script>
+<c:choose>
+	<c:when test="${not empty message }">
+		alert('${message}');
+	</c:when>
+</c:choose>
 </script>
 </head>
 <body>

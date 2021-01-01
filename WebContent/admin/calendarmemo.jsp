@@ -46,7 +46,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Tables</title>
+  <title>관리자모드</title>
  
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -121,6 +121,16 @@
         <a class="nav-link" href="noticeboard.jsp?flag=parents">
           <i class="fas fa-fw fa-table"></i>
           <span>보호자 게시판</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="request_form.jsp?flag=bluecleaning">
+          <i class="fas fa-fw fa-table"></i>
+          <span>블루클리닝견적의뢰서</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="request_form.jsp?flag=experience">
+          <i class="fas fa-fw fa-table"></i>
+          <span>체험학습신청서</span></a>
       </li>
     </ul>
 

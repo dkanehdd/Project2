@@ -1,5 +1,5 @@
-<%@page import="model.BoardDTO"%>
-<%@page import="model.BoardDAO"%>
+<%@page import="model.FormDTO"%>
+<%@page import="model.FormDAO"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
@@ -9,10 +9,10 @@
 <%@ include file="./isAdminLogin.jsp"%>
 <%
 request.setCharacterEncoding("utf-8");
-BoardDAO dao = new BoardDAO();
+FormDAO dao = new FormDAO();
 Map<String, Object> param = new HashMap<String, Object>();
 String queryStr = "";
-String flag = request.getParameter("flag")==null?"notice":request.getParameter("flag");
+String flag = request.getParameter("flag")==null?"bluecleaning":request.getParameter("flag");
 String searchColumn = request.getParameter("searchColumn");
 String searchWord = request.getParameter("searchWord");
 if (searchWord != null) {
@@ -22,7 +22,7 @@ if (searchWord != null) {
 	queryStr += "searchColumn=" + searchColumn + "&searchWord=" + searchWord + "&";
 }
 param.put("flag", flag); 
-List<BoardDTO> list = dao.selectAll(param);
+List<FormDTO> list = dao.selectAll(param);
 dao.close();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -128,7 +128,7 @@ dao.close();
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="#">공지사항</a>
+            <a href="#">견적의뢰</a>
           </li>
           <li class="breadcrumb-item active">Tables</li>
         </ol>
@@ -144,30 +144,26 @@ dao.close();
                 <thead>
                   <tr>
                     <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>날짜</th>
-                    <th>조회수</th>
-                    <th>첨부파일</th>
-                    <th>수정</th>
-                    <th>삭제</th>
+                    <th>고객명/회사명</th>
+                    <th>핸드폰번호</th>
+                    <th>이메일</th>
+                    <th>원하는날짜</th>
+                    <th>접수종류구분</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <%for(BoardDTO dto : list){ %>
+                  <%for(FormDTO dto : list){ %>
                   
                   <tr>
-                    <td><%=dto.getNum() %></td>
+                    <td><%=dto.getNum()%></td>
                     <td class="text-left"><a
-				href="view.jsp?num=<%=dto.getNum()%>">
-					<%=dto.getTitle()%>
+				href="requestview.jsp?num=<%=dto.getNum()%>">
+					<%=dto.getCompony() %>
 					</a></td>
-                    <td><%=dto.getName() %></td>
-                    <td><%=dto.getPostdate() %></td>
-                    <td><%=dto.getVisitcount() %></td>
-                    <td><%=dto.getAttachedfile() %></td>
-                    <td><input type="button" onclick="location.href='edit.jsp?num=<%=dto.getNum() %>&flag=<%=dto.getFlag() %>&attachedfile=<%=dto.getAttachedfile() %>'"value="수정"></td>
-                    <td><input type="button" onclick="location.href='delete.jsp?num=<%=dto.getNum() %>&flag=<%=dto.getFlag() %>&attachedfile=<%=dto.getAttachedfile() %>'" value="삭제"></td>
+                    <td><%=dto.getCellphone() %></td>
+                    <td><%=dto.getEmail()%></td>
+                    <td><%=dto.getSeleteDate() %></td>
+                    <td><%=dto.getRegister()%></td>
                   </tr>
                   <%} %>
                 </tbody>

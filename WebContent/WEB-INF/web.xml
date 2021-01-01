@@ -18,7 +18,10 @@
   	<param-name>MariaPass</param-name>
   	<param-value>1234</param-value>
   </context-param>
-  
+  <context-param>
+  	<param-name>adminEmail</param-name>
+  	<param-value>dkanehdd@naver.com</param-value>
+  </context-param>
   
    <context-param><!-- 한 페이지에 출력할 게시물의 갯수 -->
   	<param-name>PAGE_SIZE</param-name>

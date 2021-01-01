@@ -13,6 +13,6 @@ public class AdminPage extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect("./admin/login.html");
+		resp.sendRedirect("./admin/login.jsp");
 	}
 }

@@ -40,7 +40,7 @@ public class MemberDAO {
 		// 회원정보를 저장할 Map컬렉션 생성
 		Map<String, String> maps = new HashMap<String, String>();
 
-		String query = "SELECT id, pass, name FROM membership" + " where id=? and pass=?";
+		String query = "SELECT id, pass, name, email FROM membership" + " where id=? and pass=?";
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, id);
@@ -52,6 +52,7 @@ public class MemberDAO {
 				maps.put("id", rs.getString("id"));
 				maps.put("pass", rs.getString("pass"));
 				maps.put("name", rs.getString("name"));
+				maps.put("email", rs.getString("email"));
 				System.out.println("결과");
 			} else {
 				System.out.println("결과셋이 없습니다.");
@@ -295,6 +296,23 @@ public class MemberDAO {
 		}
 		catch (Exception e) {
 			System.out.println("수정하기중 예외발생");
+			e.printStackTrace();
+		}
+		return affected;
+	}
+	
+	public int delete(String id) {
+		int affected = 0;
+		try {
+			String query = "DELETE FROM membership "
+					+ " WHERE id=? ";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, id);
+			
+			affected = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("delete중 예외발생");
 			e.printStackTrace();
 		}
 		return affected;

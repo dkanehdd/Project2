@@ -21,6 +21,7 @@ if(memberMap.get("id")!=null){
 	//로그인 성공시 세션영역에 아래 속성을 저장한다.
 	session.setAttribute("USER_ID", memberMap.get("id"));
 	session.setAttribute("USER_NAME", memberMap.get("name"));
+	session.setAttribute("USER_MAIL", memberMap.get("email"));
 	//로그인 페이지로 이동
 	if(id_save==null||id_save.equals("")){
 		//체크해제하면 쿠키를 삭제한다. 

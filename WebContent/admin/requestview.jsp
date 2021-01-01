@@ -1,13 +1,19 @@
-<%@page import="model.BoardDTO"%>
-<%@page import="model.BoardDAO"%>
+<%@page import="model.FormDTO"%>
+<%@page import="model.FormDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="./isAdminLogin.jsp"%>
 <%
+	//파라미터로 전송된 게시물의 일련번호를 받음
 String num = request.getParameter("num");
-BoardDAO dao = new BoardDAO();
+
+FormDAO dao = new FormDAO();
+//조회수를 업데이트하여 visitcount컬럼을 1증가시킴
 
 //일련번호에 해당하는 게시물을 DTO객체로 반환함.
-BoardDTO dto = dao.selectView(num);
+FormDTO dto = dao.selectView(num); 
+ 
 dao.close();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -123,66 +129,85 @@ dao.close();
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
-							<form enctype="multipart/form-data" onsubmit="return checkValidate(this);" action="editProc.jsp"
-						method="post">
 							<table class="table table-bordered" id="dataTable" width="100%"
 								cellspacing="0">
-							<input type="hidden" name="num" value="<%=num%>"/>
-							<input type="hidden" name="originalfile" value="<%=dto.getAttachedfile() %>"/>
-							<input type="hidden" name="flag" value="<%=dto.getFlag()%>"/>
-								<colgroup>
-									<col width="20%" />
-									<col width="*" />
-								</colgroup>
 								<tbody>
 									<tr>
-										<th class="text-center" style="vertical-align: middle;">작성자</th>
-										<td><input type="text" class="form-control"
-											style="width: 100px;" value="<%=dto.getName() %>" readonly="readonly"/></td>
+										<th class="text-center" style="vertical-align: middle;">고객명/회사명</th>
+										<td><%=dto.getCompony()%></td>
+										<th class="text-center" style="vertical-align: middle;">작성일</th>
+										<td><%=dto.getPostdate()%></td>
 									</tr>
 									<tr>
 										<th class="text-center" style="vertical-align: middle;">이메일</th>
-										<td><input type="text" class="form-control"
-											style="width: 400px;" value="<%=dto.getEmail() %>" readonly="readonly"/></td>
-									</tr>
-<!-- 									<tr> -->
-<!-- 										<th class="text-center" style="vertical-align: middle;">패스워드</th> -->
-<!-- 										<td><input type="text" class="form-control" -->
-<!-- 											style="width: 200px;" /></td> -->
-<!-- 									</tr> -->
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">제목</th>
-										<td><input type="text" name="title" class="form-control" value="<%=dto.getTitle()%>"/></td>
+										<td><%=dto.getEmail()%></td>
+										<th class="text-center" style="vertical-align: middle;">핸드폰번호(담당자)</th>
+										<td><%=dto.getCellphone()%>
 									</tr>
 									<tr>
-										<th class="text-center" style="vertical-align: middle;">내용</th>
-										<td><textarea rows="10" name="content" class="form-control"><%=dto.getContent().replace("\r\n", "<br/>") %></textarea>
+										<th class="text-center" style="vertical-align: middle;">의뢰날짜</th>
+										<td><%=dto.getSeleteDate()%></td>
+										<th class="text-center" style="vertical-align: middle;">전화번호</th>
+										<td><%=dto.getTelephone()%></td>
+									</tr>
+									<tr>
+										<th class="text-center" style="vertical-align: middle;">핸드폰번호(담당자)</th>
+										<td><%=dto.getCellphone()%>
+										</td>
+										<th class="text-center" style="vertical-align: middle;">기타특이사항</th>
+										<td><%=dto.getOther()%>
 										</td>
 									</tr>
 									<tr>
-										<th class="text-center" style="vertical-align: middle;">원본파일</th>
-										<td><%=dto.getAttachedfile()%></td>
-										
+									<th class="text-center" style="vertical-align: middle;">접수구분</th>
+										<td colspan="3"><%=dto.getRegister()%>
+										</td>
+									</tr>
+									<%
+										if (dto.getHandicap() != null) {
+									%>
+									<tr>
+									<th class="text-center" style="vertical-align: middle;">체험내용</th>
+										<td colspan="3"><%=dto.getExperience()%>
+										</td>
 									</tr>
 									<tr>
-										<th class="text-center" style="vertical-align: middle;">첨부파일</th>
-										<td><input type="file" name="attachedfile" class="form-control" /></td>
+									<th class="text-center" style="vertical-align: middle;">장애유무</th>
+										<td colspan="3"><%=dto.getHandicap()%>
+										</td>
 									</tr>
-									
+									<tr>
+									<th class="text-center" style="vertical-align: middle;">보장구 유무</th>
+										<td colspan="3"><%=dto.getAssistingdevices()%>
+										</td>
+									</tr>
+									<%
+										}else{
+									%>
+									<tr>
+									<th class="text-center" style="vertical-align: middle;">청소할곳주소</th>
+										<td colspan="3"><%=dto.getAddress()%>
+										</td>
+									</tr>
+									<tr>
+									<th class="text-center" style="vertical-align: middle;">청소종류</th>
+										<td colspan="3"><%=dto.getSort()%>
+										</td>
+									</tr>
+									<tr>
+									<th class="text-center" style="vertical-align: middle;">분양평수/등기평수</th>
+										<td colspan="3"><%=dto.getAcre()%>
+										</td>
+									</tr>
+									<%} %>
 									<tr>
 										<td>
-											
 											<button class="btn btn-info" type='button' value=" 리스트 "
-												onClick="javascript:location.href='noticeboard.jsp?flag=<%=dto.getFlag()%>';">리스트보기</button>
-											
+												onClick="javascript:location.href='request_form.jsp?flag=<%=dto.getFlag()%>';">리스트보기</button>
 										</td>
-										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<button type="submit" class="btn btn-danger">전송하기</button></td>
 									</tr>
 								</tbody>
 							</table>
-
-						</form>
 						</div>
 					</div>
 					<div class="card-footer small text-muted">Updated yesterday
