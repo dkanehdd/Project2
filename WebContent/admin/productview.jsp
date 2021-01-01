@@ -1,5 +1,5 @@
-<%@page import="model.FormDTO"%>
-<%@page import="model.FormDAO"%>
+<%@page import="model.ProductDTO"%>
+<%@page import="model.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,13 +7,11 @@
 <%
 	//파라미터로 전송된 게시물의 일련번호를 받음
 String num = request.getParameter("num");
-
-FormDAO dao = new FormDAO();
-//조회수를 업데이트하여 visitcount컬럼을 1증가시킴
+ProductDAO dao = new ProductDAO();
 
 //일련번호에 해당하는 게시물을 DTO객체로 반환함.
-FormDTO dto = dao.selectView(num); 
- 
+ProductDTO dto = dao.selectView(num);
+//커넥션풀에 객체 반납
 dao.close();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -122,7 +120,7 @@ dao.close();
 
 				<!-- Breadcrumbs-->
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#"><%=dto.getFlag()%></a>
+					<li class="breadcrumb-item"><a href="#">상품정보</a>
 					</li>
 					<li class="breadcrumb-item active">Tables</li>
 				</ol>
@@ -130,7 +128,7 @@ dao.close();
 				<!-- DataTables Example -->
 				<div class="card mb-3">
 					<div class="card-header">
-						<i class="fas fa-table"></i> 회원정보
+						<i class="fas fa-table"></i> 상품정보
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -138,77 +136,30 @@ dao.close();
 								cellspacing="0">
 								<tbody>
 									<tr>
-										<th class="text-center" style="vertical-align: middle;">고객명/회사명</th>
-										<td><%=dto.getCompony()%></td>
-										<th class="text-center" style="vertical-align: middle;">작성일</th>
-										<td><%=dto.getPostdate()%></td>
+										<th class="text-center" style="vertical-align: middle;">상품번호</th>
+										<td><%=dto.getNum()%></td>
+										<th class="text-center" style="vertical-align: middle;">상품명</th>
+										<td><%=dto.getGoods_name()%></td>
 									</tr>
 									<tr>
-										<th class="text-center" style="vertical-align: middle;">이메일</th>
-										<td><%=dto.getEmail()%></td>
-										<th class="text-center" style="vertical-align: middle;">핸드폰번호(담당자)</th>
-										<td><%=dto.getCellphone()%>
+										<th class="text-center" style="vertical-align: middle;">상품가격</th>
+										<td><%=dto.getGoods_price()%></td>
+										<th class="text-center" style="vertical-align: middle;">마일리지</th>
+										<td><%=dto.getGoods_mileage()%></td>
 									</tr>
 									<tr>
-										<th class="text-center" style="vertical-align: middle;">의뢰날짜</th>
-										<td><%=dto.getSeleteDate()%></td>
-										<th class="text-center" style="vertical-align: middle;">전화번호</th>
-										<td><%=dto.getTelephone()%></td>
-									</tr>
-									<tr>
-										<th class="text-center" style="vertical-align: middle;">핸드폰번호(담당자)</th>
-										<td><%=dto.getCellphone()%>
-										</td>
-										<th class="text-center" style="vertical-align: middle;">기타특이사항</th>
-										<td><%=dto.getOther()%>
+										<th class="text-center" style="vertical-align: middle;">상품정보</th>
+										<td colspan="3"><%=dto.getGoods_content()%>
 										</td>
 									</tr>
 									<tr>
-									<th class="text-center" style="vertical-align: middle;">접수구분</th>
-										<td colspan="3"><%=dto.getRegister()%>
-										</td>
+										<th class="text-center" style="vertical-align: middle;">상품이미지</th>
+										<td colspan="3"><img src="../images/market/<%=dto.getImage() %>" alt="<%=dto.getGoods_name() %>"/></td>
 									</tr>
-									<%
-										if (dto.getHandicap() != null) {
-									%>
-									<tr>
-									<th class="text-center" style="vertical-align: middle;">체험내용</th>
-										<td colspan="3"><%=dto.getExperience()%>
-										</td>
-									</tr>
-									<tr>
-									<th class="text-center" style="vertical-align: middle;">장애유무</th>
-										<td colspan="3"><%=dto.getHandicap()%>
-										</td>
-									</tr>
-									<tr>
-									<th class="text-center" style="vertical-align: middle;">보장구 유무</th>
-										<td colspan="3"><%=dto.getAssistingdevices()%>
-										</td>
-									</tr>
-									<%
-										}else{
-									%>
-									<tr>
-									<th class="text-center" style="vertical-align: middle;">청소할곳주소</th>
-										<td colspan="3"><%=dto.getAddress()%>
-										</td>
-									</tr>
-									<tr>
-									<th class="text-center" style="vertical-align: middle;">청소종류</th>
-										<td colspan="3"><%=dto.getSort()%>
-										</td>
-									</tr>
-									<tr>
-									<th class="text-center" style="vertical-align: middle;">분양평수/등기평수</th>
-										<td colspan="3"><%=dto.getAcre()%>
-										</td>
-									</tr>
-									<%} %>
 									<tr>
 										<td>
 											<button class="btn btn-info" type='button' value=" 리스트 "
-												onClick="javascript:location.href='request_form.jsp?flag=<%=dto.getFlag()%>';">리스트보기</button>
+												onClick="javascript:location.href='productslist.jsp';">리스트보기</button>
 										</td>
 									</tr>
 								</tbody>

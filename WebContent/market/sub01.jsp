@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
  <body>
@@ -37,38 +38,33 @@
 						<th>수량</th>
 						<th>구매</th>
 					</tr>
-					<tr>
-						<td><input type="checkbox" name="" value="" /></td>
-						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
-						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
-						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
-						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="" value="" /></td>
-						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
-						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
-						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
-						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="" value="" /></td>
-						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
-						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
-						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
-						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" name="" value="" /></td>
-						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>
-						<td class="t_left"><a href="market_view.jsp">녹차 쌀 무스케잌</a></td>
-						<td class="p_style">30,000</td>
-						<td><input type="text" name="" value="1" class="n_box" /></td>
-						<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br /><a href="basket.jsp"><img src="../images/market/btn02.gif" /></a></td>
-					</tr>
+					<c:choose>
+						<c:when test="${empty lists }">
+							<tr>
+								<td colspan="6" align="center">등록된 상품이 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${lists }" var="row" varStatus="loop">
+								<!-- 리스트반복 start -->
+								<tr>
+									<td><input type="checkbox" name="" value="" /></td>
+									<td><a
+										href="../market/view?num=${row.num }&nowPage=${map.nowPage}">
+											<img src="../images/market/${row.image }" alt="${row.goods_name }" style="width: 120px;height: 80px"/></a></td>
+									<td class="text-left"><a
+										href="../market/view?num=${row.num }&nowPage=${map.nowPage}">
+											${row.goods_name } </a></td>
+									<td  class="p_style">${row.goods_price }</td>
+									<td><input type="text" name="" value="1" class="n_box" /></td>
+									<td><a href=""><img src="../images/market/btn01.gif" style="margin-bottom:5px;" /></a><br />
+									<a href="basket.jsp"><img src="../images/market/btn02.gif" /></a>
+									</td>
+								</tr>
+								<!-- 리스트반복 end -->
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 					<tr>
 						<td><input type="checkbox" name="" value="" /></td>
 						<td><a href="market_view.jsp"><img src="../images/market/img01.jpg" /></a></td>

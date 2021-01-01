@@ -102,6 +102,11 @@ String[] zip = dto.getAddress().split("/");
           <i class="fas fa-fw fa-table"></i>
           <span>체험학습신청서</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="productslist.jsp">
+          <i class="fas fa-fw fa-table"></i>
+          <span>상품목록</span></a>
+      </li>
     </ul>
 
     <div id="content-wrapper">

@@ -41,10 +41,6 @@ if(mr!=null) {
 	System.out.println("파일삭제?"+affected);
 	dao.close();
 }
-else {
-	//mr객체가 생성되지 않은경우, 즉 파일업로드 실패시...
-	affected = -1;
-}
 
 if(affected==1){
 	

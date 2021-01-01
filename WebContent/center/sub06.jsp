@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e1bfbd13b698ee8d3ecba1e269ed3918"></script>
+
 
  <body>
 	<center>
@@ -23,6 +23,7 @@
 				<div class="con_box">
 					<p class="con_tit"><img src="../images/center/sub07_tit01.gif" alt="오시는길" /></p>
 					<div id="map" style="width:700px;height:350px; margin-bottom: 50px"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e1bfbd13b698ee8d3ecba1e269ed3918"></script>
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = { 
