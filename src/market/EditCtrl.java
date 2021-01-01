@@ -64,7 +64,7 @@ public class EditCtrl extends HttpServlet{
 			기존의 파일은 삭제처리 한다.
 			첨부한 파일이 없다면 기존파일은 유지된다.
 			 */
-			if(sucOrFail==1 && mr.getFilesystemName("attachedfile")!=null) {
+			if(sucOrFail==1 && mr.getFilesystemName("image")!=null) {
 				FileUtil.deleteFile(req, "/images/upload", originalfile);
 			}
 			dao.close();

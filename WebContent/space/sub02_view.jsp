@@ -50,9 +50,9 @@ dao.close();
 			<%=dto.getName() %>
 		</td>
 		<th class="text-center" 
-			style="vertical-align:middle;">작성일</th>
+			style="vertical-align:middle;">프로그램날짜</th>
 		<td>
-			<%=dto.getPdate() %>
+			<%=dto.getC_year()%>-<%=dto.getC_month() %>-<%=dto.getC_day() %>
 		</td>
 	</tr>
 	<tr>

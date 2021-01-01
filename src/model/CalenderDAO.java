@@ -71,7 +71,7 @@ public class CalenderDAO {
 	public CalenderDTO selectView(String num) {
 
 		CalenderDTO dto = new CalenderDTO();
-		String query = "SELECT CONCAT(c_year,'-', c_month,'-', c_day) pdate, title, contents, b.id, name,num "
+		String query = "SELECT * "
 				+ "FROM calendarmemo b " + 
 				"				INNER JOIN membership m " + 
 				"				ON b.id=m.id"
@@ -84,9 +84,11 @@ public class CalenderDAO {
 				dto.setNum(rs.getString("num"));
 				dto.setTitle(rs.getString("title"));
 				dto.setContents(rs.getString("contents"));
-				dto.setPdate(rs.getString("pdate"));
 				dto.setId(rs.getString("id"));
 				dto.setName(rs.getString("name"));
+				dto.setC_year(rs.getString("c_year"));
+				dto.setC_month(rs.getString("c_month"));
+				dto.setC_day(rs.getString("c_day"));
 			}
 		} catch (Exception e) {
 			System.out.println("상세보기시 예외발생");
@@ -113,6 +115,47 @@ public class CalenderDAO {
 		}
 		catch (Exception e) {
 			System.out.println("일정 입력중 예외");
+			e.printStackTrace();
+		}
+		return affected;
+	}
+	public int updateEdit(CalenderDTO dto) {
+		int affected = 0;
+		try {
+			String query = "UPDATE CALENDARMEMO SET title=?, CONTENTS=?, c_YEAR=?,c_MONth=?,c_DAY=?, id=?  "
+					+ " WHERE num=? ";
+			
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContents());
+			psmt.setString(3, dto.getC_year());
+			psmt.setString(4, dto.getC_month());
+			psmt.setString(5, dto.getC_day());
+			psmt.setString(6, dto.getId());
+			psmt.setString(7, dto.getNum());
+			
+			affected = psmt.executeUpdate();
+			System.out.println("수정성공"+ affected);
+		}
+		catch (Exception e) {
+			System.out.println("수정하기중 예외발생");
+			e.printStackTrace();
+		}
+		return affected;
+	}
+	
+	public int delete(String num) {
+		int affected = 0;
+		try {
+			String query = "DELETE FROM calendarmemo "
+					+ " WHERE num=? ";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			
+			affected = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("delete중 예외발생");
 			e.printStackTrace();
 		}
 		return affected;

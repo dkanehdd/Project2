@@ -39,11 +39,6 @@ dao.close();
 
 <body id="page-top">
 
-<c:choose>
-	<c:when test="${not empty SUC_FAIL}">
-		alert('수정이 완료되었습니다.');
-	</c:when>
-</c:choose>
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
     <a class="navbar-brand mr-1" href="index.html">관리자모드</a>
@@ -164,7 +159,7 @@ dao.close();
 					<td  class="p_style"><%=dto.getGoods_price() %></td>
 					<td><%=dto.getGoods_mileage() %></td>
 					<td><input type="button" onclick="location.href='productedit.jsp?num=<%=dto.getNum() %>'"value="수정"></td>
-                    <td><input type="button" onclick="location.href='productdelete?num=<%=dto.getNum() %>&image=<%=dto.getImage() %>'" value="삭제"></td>
+                    <td><input type="button" onclick="location.href='../market/delete?num=<%=dto.getNum() %>&image=<%=dto.getImage() %>'" value="삭제"></td>
 				</tr>
                   <%} %>
                 </tbody>

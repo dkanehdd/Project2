@@ -185,4 +185,21 @@ public class ProductDAO {
 		}
 		return affected;
 	}
+	
+	public int delete(String num) {
+		int affected = 0;
+		try {
+			String query = "DELETE FROM shop_products "
+					+ " WHERE num=? ";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, num);
+			
+			affected = psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("delete중 예외발생");
+			e.printStackTrace();
+		}
+		return affected;
+	}
 }

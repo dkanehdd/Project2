@@ -132,6 +132,11 @@
           <i class="fas fa-fw fa-table"></i>
           <span>체험학습신청서</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="productslist.jsp">
+          <i class="fas fa-fw fa-table"></i>
+          <span>상품목록</span></a>
+      </li>
     </ul>
 
     <div id="content-wrapper">
@@ -198,7 +203,7 @@
 									//메모(일정) 추가 부분
 									for (CalenderDTO dto : list) {
 										if (Integer.parseInt(dto.getC_day()) == i) {%>
-											<a href="sub02_view.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle() %></a><br />
+											<a href="calendar_view.jsp?num=<%=dto.getNum()%>"><%=dto.getTitle() %></a><br />
 										<%
 										}
 									}

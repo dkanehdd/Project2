@@ -1,3 +1,5 @@
+<%@page import="model.CalenderDTO"%>
+<%@page import="model.CalenderDAO"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="model.MemberDTO"%>
@@ -9,13 +11,18 @@
 <%@ include file="./isAdminLogin.jsp"%>
 <%
 request.setCharacterEncoding("utf-8");
-String id = session.getAttribute("USER_ID").toString();
-String year = request.getParameter("year");
-String month = request.getParameter("month");
 
-MemberDAO dao = new MemberDAO();
-MemberDTO dto = dao.getMemberDTO(id);
-dao.close();
+
+//파라미터로 전송된 게시물의 일련번호를 받음
+String num = request.getParameter("num");
+
+CalenderDAO cdao = new CalenderDAO();
+//조회수를 업데이트하여 visitcount컬럼을 1증가시킴
+
+//일련번호에 해당하는 게시물을 DTO객체로 반환함.
+CalenderDTO cdto = cdao.selectView(num); 
+
+cdao.close();
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -145,33 +152,34 @@ function checkFormModify()
            회원정보</div>
           <div class="card-body">
             <div class="table-responsive">
-<form name="regFrm" method="post" action="../calendar/write" onSubmit="return checkFormModify();">
+<form name="regFrm" method="post" action="../calendar/edit" onSubmit="return checkFormModify();">
+              <input type="hidden" name="num" value="<%=cdto.getNum()%>"/>
               <table class=list_table cellspacing=0 cellpadding=3 width="95%" align=center border=0>
 				<tr>
 					<td class=facts_label width="15%">아 이 디</td>
 					<td class=facts_value width="85%">
-							<input type="text" size=32 name="user_id" value='<%=dto.getId() %>' readonly>
+							<input type="text" size=32 name="user_id" value='<%=cdto.getId() %>' readonly>
 					</td>
 				</tr>
 				<tr>
 					<td class=facts_label width="15%">제 목</td>
 					<td class=facts_value width="85%">
-						<input type="text" size=32 name="title" value=''>
+						<input type="text" size=32 name="title" value='<%=cdto.getTitle()%>'>
 					</td>
 				</tr>
 				<tr>
 					<td class=facts_label width="15%">내 용</td>
 					<td class=facts_value width="85%">
-						<textarea style="width: 85%" rows="15" name="contents"></textarea>
+						<textarea style="width: 85%" rows="15" name="contents"><%=cdto.getContents() %></textarea>
 					</td>
 				</tr>
 				
 				<tr>
 					<td class=facts_label width="15%">날 짜</td>
 					<td class=facts_value width="85%">
-						<input type="text" name="year" size="4" value="<%=year %>" maxlength="4">년
-						<input type="text" name="month" size="4" value="<%=month %>"   maxlength="2">월
-						<input type="text" name="day" size="4" value=""   maxlength="2">일
+						<input type="text" name="year" size="4" value="<%=cdto.getC_year() %>" maxlength="4">년
+						<input type="text" name="month" size="4" value="<%=cdto.getC_month() %>"   maxlength="2">월
+						<input type="text" name="day" size="4" value="<%=cdto.getC_day() %>"   maxlength="2">일
 					</td>
 				</tr>
 				
