@@ -188,6 +188,7 @@
                 dom.style.display = "none";
             }
         }
+       
     </script>
  <body>
 	<center>
@@ -295,7 +296,7 @@
 						<th><img src="../images/join_tit09.gif" /></th>
 						<td>
 						<input type="text" name="zipcode" value=""  class="join_input" style="width:50px;" />
-						<a href="javascript:;" title="새 창으로 열림" onclick="zipcodeFind();" onkeypress="">[우편번호검색]</a>
+						<a href="javascript:;" title="새 창으로 열림" onclick="zipcodeFind();">[우편번호검색]</a>
 						<br/>
 						
 						<input type="text" name="addr1" value=""  class="join_input" style="width:550px; margin-top:5px;" /><br>

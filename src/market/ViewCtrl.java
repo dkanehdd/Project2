@@ -26,7 +26,7 @@ public class ViewCtrl extends HttpServlet{
 		//request영역에 DTO객체 저장
 		req.setAttribute("dto", dto);
 		
-		req.getRequestDispatcher("/market.jsp").forward(req, resp);
+		req.getRequestDispatcher("/market/market_view.jsp").forward(req, resp);
 		
 	}
 }
