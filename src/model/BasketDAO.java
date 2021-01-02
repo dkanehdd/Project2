@@ -149,4 +149,18 @@ public class BasketDAO {
 		}
 		return affected;
 	}
+	
+	public void deleteall(String id)
+	{
+		try {
+			String sql = "delete From shop_basket where user_id=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.executeUpdate();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

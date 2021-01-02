@@ -119,6 +119,45 @@ function zipcodeFind2() {
         }
     }).open();
 }
+function isValidate(frm) {
+
+	if (!frm.order_name.value) {
+        alert("주문자 이름을 입력하세요");
+        return false;
+    }
+    if (frm.order_zipcode.value == ''|| frm.order_addr1.value == '') {
+    	alert("주소를 입력해주세요.");
+        return false;
+    }
+    if (!frm.order_tel1.value || !frm.order_tel2.value ||!frm.order_tel3.value ) {
+        alert("핸드폰번호를 입력하세요");
+        return false;
+    }
+    if (!frm.order_email1.value || !frm.order_email2.value) {
+        alert("이메일을 입력하세요");
+        return false;
+    }
+    if (!frm.delivery_name.value) {
+        alert("배송받는 이름을 입력하세요");
+        return false;
+    }
+    if (frm.delivery_zipcode.value == ''|| frm.delivery_addr1.value == '') {
+    	alert("주소를 입력해주세요.");
+        return false;
+    }
+    if (!frm.delivery_tel1.value || !frm.delivery_tel2.value ||!frm.delivery_tel3.value ) {
+        alert("핸드폰번호를 입력하세요");
+        return false;
+    }
+    if (!frm.delivery_email1.value || !frm.delivery_email2.value) {
+        alert("이메일을 입력하세요");
+        return false;
+    }
+    if (!frm.payment.value) {
+        alert("결제 방법을 선택하세요");
+        return false;
+    }
+}
 </script>
 	<center>
 	<div id="wrap">
@@ -186,7 +225,7 @@ function zipcodeFind2() {
 					<p style="text-align: right;"><button type="submit" class="btn btn-danger" style="font-weight: bold;">선택항목삭제</button></p>
 				</form>
 				<p class="con_tit"><img src="../images/market/basket_title02.gif" /></p>
-				<form action="" name='regifrm'>
+				<form action="../market/order" name='regifrm' method="post" onsubmit="return isValidate(this)">
 				<table cellpadding="0" cellspacing="0" border="0" class="con_table" style="width:100%;" style="margin-bottom:50px;">
 					<colgroup>
 						<col width="15%" />
@@ -194,6 +233,7 @@ function zipcodeFind2() {
 					</colgroup>
 					<tbody>
 						<tr>
+							<input type="hidden" name="id" value="<%=session.getAttribute("USER_ID").toString() %>" />
 							<th>성명</th>
 							<td style="text-align:left;"><input type="text" name="order_name"  value="<%=mdto.getName() %>" class="join_input" /></td>
 						</tr>
@@ -310,6 +350,7 @@ function zipcodeFind2() {
 						<tr>
 							<th>결제금액</th>
 							<td style="text-align:left;"><span class="money"><fmt:formatNumber value="<%=totalprice>=50000?totalprice:totalprice+2500%>" type="number" />원</span></td>
+							<input type="hidden" name="totalprice" value="<%=totalprice%>"/>
 						</tr>
 						<tr>
 							<th>결제방식선택</th>
