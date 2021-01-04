@@ -52,7 +52,7 @@ public class ExperienceCtrl extends HttpServlet{
 		
 		dao.close();
 		String mailContents = ""
-				+"<table style='border: 1px solid black; padding: 5px;'>"
+				+"<table border=1 style='border: 1px solid black; padding: 5px;'>"
 				+"<tr>"
 				+"	<td>고객명/회사명</td>"
 				+"	<td>"+dto.getCompony()+"</td>"

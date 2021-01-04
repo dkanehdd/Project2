@@ -63,32 +63,42 @@ String[] zip = dto.getAddress().split("/");
     <!-- Sidebar -->
     <ul class="sidebar navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
-      <li class="nav-item active">
         <a class="nav-link" href="member_table.jsp">
           <i class="fas fa-fw fa-table"></i>
           <span>회원정보</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="notice_table.jsp">
+        <a class="nav-link" href="noticeboard.jsp?flag=notice">
           <i class="fas fa-fw fa-table"></i>
           <span>공지사항테이블</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="calendarmemo.jsp">
+        <a class="nav-link" href="noticeboard.jsp?flag=free">
           <i class="fas fa-fw fa-table"></i>
+          <span>자유게시판</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="calendarmemo.jsp">
+          <i class="fas fa-fw fa-chart-area"></i>
           <span>일정관리</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="adminDataRoom.jsp">
+        <a class="nav-link" href="noticeboard.jsp?flag=photo">
+          <i class="fas fa-fw fa-table"></i>
+          <span>사진게시판</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="noticeboard.jsp?flag=dataroom">
+          <i class="fas fa-fw fa-table"></i>
+          <span>정보자료실</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="noticeboard.jsp?flag=admin">
           <i class="fas fa-fw fa-table"></i>
           <span>직원자료실</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="parentsboard.jsp">
+        <a class="nav-link" href="noticeboard.jsp?flag=parents">
           <i class="fas fa-fw fa-table"></i>
           <span>보호자 게시판</span></a>
       </li>

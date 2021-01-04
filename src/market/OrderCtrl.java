@@ -37,7 +37,7 @@ public class OrderCtrl extends HttpServlet{
 		List<BasketDTO> list = bdao.selectAll(id);
 		String basket = "";
 		for(BasketDTO dto : list) {
-			basket = dto.getGoods_name()+" : " + dto.getGoods_count()+"개"+" /";
+			basket += dto.getGoods_name()+" : " + dto.getGoods_count()+"개"+" /";
 		}
 		
 		OrderingDTO odto = new OrderingDTO();

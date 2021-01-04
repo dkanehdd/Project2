@@ -88,7 +88,7 @@
 	<button type="button" class="btn btn-danger mr-auto" onclick="location.href='./delete?num=${dto.num}&attachedfile=${dto.attachedfile }'">삭제하기</button>	
 	
 	<button type="button" class="btn btn-warning ml-auto mr-3" 
-					onclick="location.href='/community/sub.do?flag=${dto.flag}';">리스트보기</button>
+					onclick="location.href='../community/sub.do?flag=${dto.flag}';">리스트보기</button>
 </div>
 </form> 
 

@@ -95,4 +95,33 @@ public class OrderingDAO {
 		}
 		return list;
 	}
+	
+	public OrderingDTO selectView(String idx) {
+		OrderingDTO dto = new OrderingDTO();
+		try {
+			String sql = "SELECT * FROM shop_ordering where idx=?";
+			psmt = con.prepareStatement(sql);
+			psmt.setString(1, idx);
+			
+			rs=psmt.executeQuery();
+			if(rs.next()) {
+				
+				dto.setId(rs.getString("id"));
+				dto.setIdx(rs.getInt("idx"));
+				dto.setOrder_name(rs.getString("Order_name"));
+				dto.setOrder_info(rs.getString("Order_info"));
+				dto.setDelivery_name(rs.getString("Delivery_name"));
+				dto.setDelivery_info(rs.getString("Delivery_info"));
+				dto.setMessage(rs.getString("Message"));
+				dto.setTotal_price(rs.getInt("total_price"));
+				dto.setPayment(rs.getString("payment"));
+				dto.setBasket(rs.getString("basket"));
+				dto.setPostdate(rs.getString("postdate"));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
 }

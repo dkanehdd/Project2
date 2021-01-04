@@ -36,7 +36,7 @@ public class BoardDAO {
 
 			String sql = "SELECT IF(char_LENGTH(title)>20, concat(LEFT(title,20),'...'), title) AS 'title', "
 					+ "DATE_FORMAT(postdate , '%Y.%m.%d') AS pdate, num, attachedfile, flag "
-					+ "FROM multi_board WHERE flag=? ORDER BY num DESC LIMIT 0, 4 ";
+					+ "FROM multi_board WHERE flag=? ORDER BY num DESC LIMIT 0, 6 ";
 			psmt = con.prepareStatement(sql);
 			psmt.setString(1, flag);
 			rs = psmt.executeQuery();

@@ -31,6 +31,10 @@
   	<param-name>PHOTO_PAGE_SIZE</param-name>
   	<param-value>8</param-value>
   </context-param>
+  <context-param><!-- 한 페이지에 출력할 게시물의 갯수 -->
+  	<param-name>MARKET_PAGE_SIZE</param-name>
+  	<param-value>6</param-value>
+  </context-param>
   <context-param><!-- 한 블럭당 출력할 페이지번호의 갯수 -->
   	<param-name>BLOCK_PAGE</param-name>
   	<param-value>5</param-value>

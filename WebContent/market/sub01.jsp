@@ -65,6 +65,12 @@
 					</c:choose>
 				</table>
 				</form>
+				<div class="row text-center">
+					<!-- 페이지번호 부분 -->
+					<ul class="pagination">
+					${map.pagingBS4 }
+					</ul>
+				</div>
 			</div>
 		</div>
 		<%@ include file="../include/quick.jsp" %>

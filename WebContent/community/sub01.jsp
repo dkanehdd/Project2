@@ -32,7 +32,7 @@
 							style="margin-bottom: 20px; padding-right: 50px;">
 							<!-- 검색부분 -->
 							<form class="form-inline">
-								<input type="hidden" name="admin" value="T"/>
+								<input type="hidden" name="flag" value="admin"/>
 								<div class="form-group">
 									<select name="searchColumn" class="form-control">
 										<option value="title">제목</option>
@@ -117,7 +117,7 @@
 						</div>
 						<div class="row text-center">
 							<!-- 페이지번호 부분 -->
-							<ul class="pagination pager">
+							<ul class="pagination">
 							${map.pagingBS4 }
 							</ul>
 						</div>

@@ -241,8 +241,8 @@ function isValidate(frm) {
 							<th>주소</th>
 							<td style="text-align:left;"><input type="text" name="order_zipcode"  value="<%=address[0] %>" class="join_input" style="width:100px; margin-bottom:5px;" />
 							<a href="javascript:;" title="새 창으로 열림" onclick="zipcodeFind();"><img src="../images/market/basket_btn03.gif" /></a><br />
-							<input type="text" name="order_addr1"  value="<%=address[1] %>" class="join_input" style="width:300px; margin-bottom:5px;" /> 기본주소<br />
-							<input type="text" name="order_addr2"  value="<%=address[2] %>" class="join_input" style="width:300px;" /> 나머지주소</td>
+							<input type="text" name="order_addr1"  value="<%=address.length<=1?"":address[1] %>" class="join_input" style="width:300px; margin-bottom:5px;" /> 기본주소<br />
+							<input type="text" name="order_addr2"  value="<%=address.length<=1?"":address[2] %>" class="join_input" style="width:300px;" /> 나머지주소</td>
 						</tr>
 						<tr>
 							<th>휴대폰</th>

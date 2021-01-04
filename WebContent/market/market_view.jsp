@@ -57,6 +57,8 @@
 						</p>
 						<p>${dto.goods_content }</p>
 						</form>
+						
+						<button class="btn btn-success" onclick="location.href='../market/list'">상품목록</button>
 						<button class="btn btn-danger" onclick="location.href='basket.jsp'">장바구니 바로가기</button>
 						
 					</div>

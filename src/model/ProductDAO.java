@@ -87,7 +87,7 @@ public class ProductDAO {
 		// 게시물의 갯수는 최초 0으로 초기화
 		int totalCount = 0;
 		// 기본쿼리문(전체레코드를 대상으로 함)
-		String query = "SELECT COUNT(*) FROM shop_product ";
+		String query = "SELECT COUNT(*) FROM shop_products ";
 		// JSP페이지에서 검색어를 입력한 경우 where절이 동적으로 추가된다.
 		System.out.println("query=" + query);
 
@@ -98,8 +98,9 @@ public class ProductDAO {
 			rs.next();
 			totalCount = rs.getInt(1);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
+		System.out.println(totalCount);
 		return totalCount;
 	}
 	

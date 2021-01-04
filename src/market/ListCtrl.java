@@ -32,7 +32,7 @@ public class ListCtrl extends HttpServlet{
 		/*********** 페이지처리를 위한 코드 추가 start ************/ 
 		//한페이지에 출력할 레코드의 갯수 : 10
 		ServletContext application = this.getServletContext();
-		int pageSize = Integer.parseInt(application.getInitParameter("PAGE_SIZE"));
+		int pageSize = Integer.parseInt(application.getInitParameter("MARKET_PAGE_SIZE"));
 		//한 블럭당 출력할 페이지의 갯수 : 5
 		int blockPage = Integer.parseInt(application.getInitParameter("BLOCK_PAGE"));
 
@@ -55,15 +55,14 @@ public class ListCtrl extends HttpServlet{
 		param.put("nowPage", nowPage);
 		param.put("totalRecordCount", totalRecordCount);
 		param.put("pageSize", pageSize);
+		
 		String pagingBS4 = PagingUtil.pagingBS4(totalRecordCount, 
-				pageSize, blockPage, nowPage, 
-				"../merket/list?nowPage="+nowPage);
+				pageSize, blockPage, nowPage, "../market/list?");
 		param.put("pagingBS4", pagingBS4);
 		
 		List<ProductDTO> lists = dao.selectAll(param); 
 		//DB자원해제
 		dao.close();
-		
 		//데이터를 request영역에 저장한다.
 		req.setAttribute("lists", lists);
 		req.setAttribute("map", param);

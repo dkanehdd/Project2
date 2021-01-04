@@ -18,7 +18,7 @@ if(!(pass.equals("")||pass==null)){
 //메일 발송을 위한 객체생성
 SMTPAuth smtp = new SMTPAuth();
 	String subject = "마포구립 장애인 직업재활센터";
-	String content = "비밀번호: "+ pass;
+	String content = "<h1>회원님의 비밀번호는 "+ pass+" 입니다.</h1>";
 	//메일을 보내기위한 여러가지 폼값을 Map컬렉션에 저장
 	Map<String, String> emailContent = new HashMap<String, String>();
 	emailContent.put("from", "dkanehdd@naver.com");

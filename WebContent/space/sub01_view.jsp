@@ -91,7 +91,7 @@ dao.close();
 	<tr>
 		<th class="text-center" 
 			style="vertical-align:middle;">내용</th>
-		<td colspan="3">
+		<td colspan="3" style="font-size: 1.5em">
 			<%=dto.getContent().replace("\r\n", "<br/>") %> 
 		</td>
 	</tr>

@@ -106,7 +106,7 @@
             if (f.user_id.readOnly == true) return false;
             f.user_id.readOnly = true;
             window.open("./id_overapping2.jsp?id=" + f.user_id.value,
-                "idover", "width=600,height=600");
+                "idover", "width=400,height=400");
 
         }
 

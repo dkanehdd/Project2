@@ -33,7 +33,7 @@ public class writeCtrl extends HttpServlet {
 		dao.close();
 		req.setAttribute("dto", dto);
 		req.setAttribute("flag", flag);
-		if(flag.equals("notice")) {
+		if(flag.equals("admin")) {
 			req.getRequestDispatcher("../community/sub01_write.jsp").forward(req, resp);
 		}
 		else {

@@ -27,7 +27,7 @@
 							style="margin-bottom: 20px; padding-right: 50px;">
 							<!-- 검색부분 -->
 							<form class="form-inline">
-							<input type="hidden" name="admin" value="F"/>
+							<input type="hidden" name="flag" value="parents"/>
 								<div class="form-group">
 									<select name="searchColumn" class="form-control">
 										<option value="title">제목</option>

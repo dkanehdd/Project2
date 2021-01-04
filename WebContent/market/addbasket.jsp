@@ -24,7 +24,7 @@ bdto.setTotal_price(Integer.parseInt(count)*dto.getGoods_price());
 
 BasketDAO bdao = new BasketDAO();
 int affected = bdao.addBasket(bdto);
-
+bdao.close();
 if(affected==1){
 	JavascriptUtil.jsAlertLocation("장바구니에 추가되었습니다.", "../market/list", out);
 }

@@ -55,22 +55,25 @@ dao.close();
     </script>
 </head>
 <body>
-    <h2>아이디 중복확인 하기</h2>
-
-    <h3>입력한 아이디 : <%=id %></h3>
 	<%if(overId) {%>
-    <h3>사용가능한 아이디입니다.</h3>
-    <form name="overlapFrm">
-        <input type="text" name="retype_id" size="20" value="<%=id %>" readonly="readonly">
-        <input type="button" value="아이디사용하기" onclick="idUse();">
-    </form>
+	    <div class="container">
+	    <h3 class="text-info">입력한 아이디 : <%=id %></h3>
+	    <h3>사용가능한 아이디입니다.</h3>
+	    <form name="overlapFrm">
+	        <input type="text" name="retype_id" size="20" value="<%=id %>" readonly="readonly">
+	        <input class="btn btn-success" type="button" value="아이디사용하기" onclick="idUse();">
+	    </form>
+	    </div>
     <%}else { %>
-    <h3 style="color: red;">중복된 아이디가 있습니다. 다른아이디를 입력하세요</h3>
+    <div class="container">
+    <h3 class="text-info">입력한 아이디 : <%=id %></h3>
+    <h3 class="text-danger">중복된 아이디가 있습니다. <br /> 다른아이디를 입력하세요</h3>
     <form name="overlapFrm">
         <input type="text" name="id" size="20" value="<%=id %>">
-        <input type="button" value="중복확인" onclick="checkId();">
+        <input class="btn btn-danger" type="button" value="중복확인" onclick="checkId();">
     </form>
     <h4 id="warning"></h4>
+    </div>
     <%} %>
     
 </body>

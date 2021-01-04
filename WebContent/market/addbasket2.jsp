@@ -24,7 +24,7 @@ bdto.setTotal_price(dto.getGoods_price());
 
 BasketDAO bdao = new BasketDAO();
 int affected = bdao.addBasket(bdto);
-
+bdao.close();
 if(affected==1){
 	JavascriptUtil.jsAlertLocation("구매하기페이지로 이동합니다.", location, out);
 }
