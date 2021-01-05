@@ -25,6 +25,8 @@ mdao.close();
 <%@ include file="../include/global_head.jsp" %>
 
 <script type="text/javascript">
+
+
 function edit() {
 	var f = document.regiform;
 	f.action="updatebasket.jsp";
@@ -225,7 +227,7 @@ function isValidate(frm) {
 					<p style="text-align: right;"><button type="submit" class="btn btn-danger" style="font-weight: bold;">선택항목삭제</button></p>
 				</form>
 				<p class="con_tit"><img src="../images/market/basket_title02.gif" /></p>
-				<form action="../market/order" name='regifrm' method="post" onsubmit="return isValidate(this)">
+				<form action="../market/order.jsp" name='regifrm' method="post" onsubmit="return isValidate(this)">
 				<table cellpadding="0" cellspacing="0" border="0" class="con_table" style="width:100%;" style="margin-bottom:50px;">
 					<colgroup>
 						<col width="15%" />
@@ -235,18 +237,18 @@ function isValidate(frm) {
 						<tr>
 							<input type="hidden" name="id" value="<%=session.getAttribute("USER_ID").toString() %>" />
 							<th>성명</th>
-							<td style="text-align:left;"><input type="text" name="order_name"  value="<%=mdto.getName() %>" class="join_input" /></td>
+							<td style="text-align:left;"><input type="text" name="order_name" id="name" value="<%=mdto.getName() %>" class="join_input" /></td>
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td style="text-align:left;"><input type="text" name="order_zipcode"  value="<%=address[0] %>" class="join_input" style="width:100px; margin-bottom:5px;" />
+							<td style="text-align:left;"><input type="text" name="order_zipcode"  id="zipcode" value="<%=address[0] %>" class="join_input" style="width:100px; margin-bottom:5px;" />
 							<a href="javascript:;" title="새 창으로 열림" onclick="zipcodeFind();"><img src="../images/market/basket_btn03.gif" /></a><br />
-							<input type="text" name="order_addr1"  value="<%=address.length<=1?"":address[1] %>" class="join_input" style="width:300px; margin-bottom:5px;" /> 기본주소<br />
-							<input type="text" name="order_addr2"  value="<%=address.length<=1?"":address[2] %>" class="join_input" style="width:300px;" /> 나머지주소</td>
+							<input type="text" name="order_addr1" id="addr1" value="<%=address.length<=1?"":address[1] %>" class="join_input" style="width:300px; margin-bottom:5px;" /> 기본주소<br />
+							<input type="text" name="order_addr2" id="addr2" value="<%=address.length<=1?"":address[2] %>" class="join_input" style="width:300px;" /> 나머지주소</td>
 						</tr>
 						<tr>
 							<th>휴대폰</th>
-							<td style="text-align:left;"><input type="text" name="order_tel1"  value="<%=tel[0] %>" class="join_input" style="width:50px;" onkeyup="commonFocusMove(this, 3, 'order_tel2');"/> - 
+							<td style="text-align:left;"><input type="text" name="order_tel1" id="order_tel1" value="<%=tel[0] %>" class="join_input" style="width:50px;" onkeyup="commonFocusMove(this, 3, 'order_tel2');"/> - 
 							<input type="text" name="order_tel2" id="order_tel2" value="<%=tel[1] %>" class="join_input" style="width:50px;" maxlength="4" onkeyup="commonFocusMove(this, 4, 'order_tel3');"/> - 
 							<input type="text" name="order_tel3" id="order_tel3"  value="<%=tel[2] %>" class="join_input" style="width:50px;" maxlength="4" onkeyup="commonFocusMove(this, 4, 'order_email1');"/></td>
 						</tr>
@@ -350,7 +352,7 @@ function isValidate(frm) {
 						<tr>
 							<th>결제금액</th>
 							<td style="text-align:left;"><span class="money"><fmt:formatNumber value="<%=totalprice>=50000?totalprice:totalprice+2500%>" type="number" />원</span></td>
-							<input type="hidden" name="totalprice" value="<%=totalprice%>"/>
+							<input type="hidden" name="totalprice" id="totalprice" value="<%=totalprice%>"/>
 						</tr>
 						<tr>
 							<th>결제방식선택</th>

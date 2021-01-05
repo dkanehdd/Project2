@@ -136,6 +136,7 @@ dao.close();
               <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                   <tr>
+                  	<th>번호</th>
                     <th>아이디</th>
                     <th>주문자</th>
                     <th>주문자전화번호</th>
@@ -153,6 +154,7 @@ dao.close();
                    %>
                   
                   <tr>
+                  	<td><%=dto.getIdx() %></td>
                     <td><%=dto.getId() %></td>
                     <td class="text-left"><a
 				href="orderview.jsp?idx=<%=dto.getIdx()%>">
