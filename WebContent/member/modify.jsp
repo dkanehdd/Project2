@@ -236,11 +236,11 @@ String[] zip = dto.getAddress().split("/");
 					</colgroup>
 					<tr>
 						<th><img src="../images/join_tit001.gif" /></th>
-						<td><input type="text" name="name"  value="<%=dto.getName() %>" class="join_input" readonly="readonly"/></td>
+						<td><input type="text" name="name"  value="<%=dto.getName() %>" class="join_input" readonly="readonly" style="background-color: silver;"/></td>
 					</tr>
 					<tr>
 						<th><img src="../images/join_tit002.gif" /></th>
-						<td><input type="text" name="user_id"  value="<%=dto.getId() %>" class="join_input" readonly="readonly"/></td>
+						<td><input type="text" name="user_id"  value="<%=dto.getId() %>" class="join_input" readonly="readonly" style="background-color: silver;"/></td>
 					</tr>
 					<tr>
 						<th><img src="../images/join_tit003.gif" /></th>
