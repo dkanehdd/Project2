@@ -354,7 +354,7 @@ function isValidate(frm) {
 						</tr>
 						<tr>
 							<th>결제방식선택</th>
-							<td style="text-align:left;"><input type="radio" name="payment" value="card" /> 카드결제&nbsp;&nbsp;&nbsp;<input type="radio" name="payment" value="without"/> 무통장입금&nbsp;&nbsp;&nbsp;<input type="radio" name="payment" value="realtime"/> 실시간 계좌이체</td>
+							<td style="text-align:left;"><input type="radio" name="payment" value="카드결제" /> 카드결제&nbsp;&nbsp;&nbsp;<input type="radio" name="payment" value="무통장입금"/> 무통장입금&nbsp;&nbsp;&nbsp;<input type="radio" name="payment" value="실시간계좌이체"/> 실시간 계좌이체</td>
 						</tr>
 					</tbody>
 				</table>

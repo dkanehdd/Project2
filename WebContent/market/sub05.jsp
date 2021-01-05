@@ -60,7 +60,7 @@
 							<td style="text-align:left;" style="padding:0px;">
 								<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
 									<tr>
-										<td style="border-bottom:0px;"><input type="radio" name="handicap1"  value="장애있음" /> 유&nbsp;&nbsp;&nbsp;<input type="radio" name="handicap1" checked value="장애없음" /> 무</td>
+										<td style="border-bottom:0px;"><input type="radio" name="handicap1" value="장애있음"  checked="checked" onchange="nohandicap(this.value);"/> 유&nbsp;&nbsp;&nbsp;<input type="radio" name="handicap1" value="장애없음" onchange="nohandicap(this.value);"/> 무</td>
 										<th style="border-bottom:0px;" width="100px">주요장애유형</th>
 										<td style="border-right:0px; border-bottom:0px;"><input type="text" name="handicap2"  value="" class="join_input" /></td>
 									</tr>
@@ -72,7 +72,7 @@
 							<td style="text-align:left;" style="padding:0px;">
 								<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
 									<tr>
-										<td style="border-bottom:0px;"><input type="radio" name="assistingdevices1"  value="보장구있음" /> 유&nbsp;&nbsp;&nbsp;<input type="radio" name="assistingdevices1" checked value="보장구없음" /> 무</td>
+										<td style="border-bottom:0px;"><input type="radio" name="assistingdevices1"  value="보장구있음"  checked="checked" onchange="noad(this.value);"/> 유&nbsp;&nbsp;&nbsp;<input type="radio" name="assistingdevices1" value="보장구없음"  onchange="noad(this.value);"/> 무</td>
 										<th style="border-bottom:0px;" width="100px">보장구 명</th>
 										<td style="border-right:0px; border-bottom:0px;"><input type="text" name="assistingdevices2"  value="" class="join_input" /></td>
 									</tr>
@@ -124,7 +124,7 @@
 								<table cellpadding="0" cellspacing="0" border="0" style="width:100%;">
 									<tr>
 										<td>케익체험</td>
-										<td style="border-right:0px;"><input type="text" name="experience1"  value="" class="join_input" /></td>
+										<td style="border-right:0px;"><input type="text" name="experience1"  value="" class="join_input" />&nbsp;&nbsp;&nbsp;<span>※ 참가 인원수를 적어주세요</span></td>
 									</tr>
 									<tr>
 										<td style="border-bottom:0px;">쿠키체험</td>
@@ -202,7 +202,7 @@ function isValidate(frm) {
         alert("빈칸없이 입력해주세요.");
         return false;
     }
-    if (frm.handicap2.value == '') {
+    if (frm.handicap2.value == '' && frm.handicap2.readOnly==false) {
     	alert("빈칸없이 입력해주세요.");
         return false;
     }
@@ -214,7 +214,7 @@ function isValidate(frm) {
     	alert("빈칸없이 입력해주세요.");
         return false;
     }
-    if (!frm.assistingdevices2.value) {
+    if (!frm.assistingdevices2.value&&frm.assistingdevices2.readOnly==false) {
     	alert("빈칸없이 입력해주세요.");
         return false;
     }
@@ -234,6 +234,32 @@ function isValidate(frm) {
     	alert("빈칸없이 입력해주세요.");
         return false;
     }
+}
+function nohandicap(v) {
+	var f = document.regiform;
+	console.log(v);
+	if(v=="장애없음"){
+		f.handicap2.readOnly = true;
+		f.handicap2.value = "";
+		f.handicap2.style.backgroundColor ='#D5CEC4'; 
+	}
+	else{
+		f.handicap2.readOnly = false;
+		f.handicap2.style.backgroundColor ='white'; 
+	}
+}
+function noad(v) {
+	var f = document.regiform;
+	console.log(v);
+	if(v=="보장구없음"){
+		f.assistingdevices2.readOnly = true;
+		f.assistingdevices2.value = "";
+		f.assistingdevices2.style.backgroundColor ='#D5CEC4'; 
+	}
+	else{
+		f.assistingdevices2.readOnly = false;
+		f.assistingdevices2.style.backgroundColor ='white'; 
+	}
 }
 </script>
 		</div>

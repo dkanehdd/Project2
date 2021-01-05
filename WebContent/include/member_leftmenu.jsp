@@ -12,7 +12,7 @@
 	<area shape="rect" alt="" title="" coords="10,48,134,86" href="../member/join01.jsp" target="" />
 	<area shape="rect" alt="" title="" coords="10,90,134,125" href="../member/id_pw.jsp" target="" />
 	<area shape="rect" alt="" title="" coords="10,132,134,166" href="../member/sitemap.jsp" target="" />
-</map>
+</map> 
 <!-- <ul>
 	<li><a href="../member/login.jsp">메뉴1</a></li>
 	<li><a href="../member/join01.jsp">메뉴2</a></li>

@@ -30,12 +30,12 @@
         <form action="./LoginProc.jsp">
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" name="user_id" class="form-control" placeholder="ìì´ë" autofocus="autofocus">
+              <input type="text" name="user_id" class="form-control" placeholder="아이디" autofocus="autofocus">
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="password" name="user_pw" class="form-control" placeholder="ë¹ë°ë²í¸" >
+              <input type="password" name="user_pw" class="form-control" placeholder="패스워드" >
             </div>
           </div>
           <button class="btn btn-primary btn-block" type="submit">로그인</button>

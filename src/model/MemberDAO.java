@@ -279,7 +279,7 @@ public class MemberDAO {
 		int affected = 0;
 		try {
 			String query = "UPDATE membership SET name=?, pass=?, email=?, admin=?,"
-					+ " telephone=?, cellphone=? "
+					+ " telephone=?, cellphone=?, address=? "
 					+ " WHERE id=? ";
 			
 			psmt = con.prepareStatement(query);
@@ -289,7 +289,8 @@ public class MemberDAO {
 			psmt.setString(4, dto.getAdmin());
 			psmt.setString(5, dto.getTelephone());
 			psmt.setString(6, dto.getCellphone());
-			psmt.setString(7, dto.getId());
+			psmt.setString(7, dto.getAddress());
+			psmt.setString(8, dto.getId());
 			
 			affected = psmt.executeUpdate();
 			System.out.println("수정성공"+ affected);

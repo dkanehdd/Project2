@@ -17,8 +17,8 @@ public class ExperienceCtrl extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String compony = req.getParameter("compony");
-		String handicap = req.getParameter("handicap1")+":"+req.getParameter("handicap2");
-		String assistingdevices = req.getParameter("assistingdevices1")+":"+req.getParameter("assistingdevices2");
+		String handicap = req.getParameter("handicap1")+":"+req.getParameter("handicap2")==null?"":req.getParameter("handicap2");
+		String assistingdevices = req.getParameter("assistingdevices1")+":"+req.getParameter("assistingdevices2")==null?"":req.getParameter("assistingdevices2");
 		String telephone = req.getParameter("tel1")+"-"
 				+ req.getParameter("tel2")+"-"
 				+req.getParameter("tel3");

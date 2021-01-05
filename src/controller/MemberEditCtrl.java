@@ -16,7 +16,7 @@ public class MemberEditCtrl extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-req.setCharacterEncoding("UTF-8");
+		req.setCharacterEncoding("UTF-8");
 		
 		String id = req.getParameter("user_id");
 		String pw = req.getParameter("user_pass")==null?req.getParameter("originalpass"):req.getParameter("user_pass");

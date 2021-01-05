@@ -18,7 +18,7 @@ String searchWord = request.getParameter("searchWord");
 if (searchWord != null) {
 	param.put("Column", searchColumn);
 	param.put("Word", searchWord);
-
+	
 	queryStr += "searchColumn=" + searchColumn + "&searchWord=" + searchWord + "&";
 }
 List<MemberDTO> list = dao.selectAll(param);

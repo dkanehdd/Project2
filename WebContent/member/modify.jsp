@@ -1,6 +1,19 @@
+<%@page import="model.MemberDTO"%>
+<%@page import="model.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../include/global_head.jsp" %>
+<%
+request.setCharacterEncoding("utf-8");
+String id = session.getAttribute("USER_ID").toString();
+MemberDAO dao = new MemberDAO();
+MemberDTO dto = dao.getMemberDTO(id);
+dao.close();
+String[] email = dto.getEmail().split("@");
+String[] tel = dto.getTelephone().split("-");
+String[] cell = dto.getCellphone().split("-");
+String[] zip = dto.getAddress().split("/");
+%>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    <script>
        function zipcodeFind() {
@@ -194,17 +207,27 @@
 
 		<div class="contents_box">
 			<div class="left_contents">
-				<%@ include file = "../include/member_leftmenu.jsp" %>
+				<img src="../images/member/left_title.gif" alt="센터소개 member Introduction" class="left_title" />
+				
+ 
+<!-- <object type="application/x-shockwave-flash" data="../swf/submenu08.swf" width="152" height="255">
+<param name="wmode" value="transparent" />
+</object>  -->
+<img src="../images/menu/9.jpg" alt="" usemap="#LNB"/>
+<map name="LNB">
+	<area shape="rect" alt="" title="" coords="10,9,134,44" href="../member/modify.jsp" target="" />
+	<area shape="rect" alt="" title="" coords="10,48,134,86" href="../member/Logout.jsp" target="" />
+</map> 
 			</div>
 			<div class="right_contents">
 				<div class="top_title">
-					<img src="../images/join_tit.gif" alt="회원가입" class="con_title" />
-					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;멤버쉽&nbsp;>&nbsp;회원가입<p>
+					<p style="color:#D64823;font-size: 18pt;">회원정보수정</p>
+					<p class="location"><img src="../images/center/house.gif" />&nbsp;&nbsp;멤버쉽&nbsp;>&nbsp;정보수정<p>
 				</div>
 
 				<p class="join_title"><img src="../images/join_tit03.gif" alt="회원정보입력" /></p>
 				<!-- 회원가입폼  method는 포스트로 바꾸기!! -->
-				<form action="../member/MemberJoin.do" name="regiform" onsubmit="return isValidate(this);" method="post">
+				<form action="../member/MemberEdit.do" name="regiform" onsubmit="return isValidate(this);" method="post">
 				
 				<table cellpadding="0" cellspacing="0" border="0" class="join_box">
 					<colgroup>
@@ -213,11 +236,11 @@
 					</colgroup>
 					<tr>
 						<th><img src="../images/join_tit001.gif" /></th>
-						<td><input type="text" name="name"  value="" class="join_input" /></td>
+						<td><input type="text" name="name"  value="<%=dto.getName() %>" class="join_input" readonly="readonly"/></td>
 					</tr>
 					<tr>
 						<th><img src="../images/join_tit002.gif" /></th>
-						<td><input type="text" name="user_id"  value="" class="join_input" />&nbsp;<a onclick="checkId();" style="cursor:hand;"><img src="../images/btn_idcheck.gif" alt="중복확인"/></a>&nbsp;&nbsp;<span>* 4자 이상 12자 이내의 영문/숫자 조합하여 공백 없이 기입</span></td>
+						<td><input type="text" name="user_id"  value="<%=dto.getId() %>" class="join_input" readonly="readonly"/></td>
 					</tr>
 					<tr>
 						<th><img src="../images/join_tit003.gif" /></th>
@@ -232,30 +255,30 @@
 					<tr>
 						<th><img src="../images/join_tit06.gif" /></th>
 						<td>
-							<input type="text" name="tel1" value="" maxlength="3" class="join_input" style="width:50px;" 
+							<input type="text" name="tel1" value="<%=tel[0] %>" maxlength="3" class="join_input" style="width:50px;" 
 								onkeyup="commonFocusMove(this, 3, 'tel2');" />&nbsp;-&nbsp;
-							<input type="text" name="tel2" value="" maxlength="4" class="join_input" style="width:50px;" 
+							<input type="text" name="tel2" value="<%=tel[1] %>" maxlength="4" class="join_input" style="width:50px;" 
 								onkeyup="commonFocusMove(this, 4, 'tel3');" id="tel2"/>&nbsp;-&nbsp;
-							<input type="text" name="tel3" value="" maxlength="4" class="join_input" style="width:50px;" 
+							<input type="text" name="tel3" value="<%=tel[2] %>" maxlength="4" class="join_input" style="width:50px;" 
 								onkeyup="commonFocusMove(this, 4, 'mobile1');" id="tel3"/>
 						</td>
 					</tr>
 					<tr>
 						<th><img src="../images/join_tit07.gif" /></th>
 						<td>
-							<input type="text" name="mobile1" value="" maxlength="3" class="join_input" style="width:50px;" 
+							<input type="text" name="mobile1" value="<%=cell[0] %>" maxlength="3" class="join_input" style="width:50px;" 
 								onkeyup="commonFocusMove(this, 3, 'mobile2');" id="mobile1"/>&nbsp;-&nbsp;
-							<input type="text" name="mobile2" value="" maxlength="4" class="join_input" style="width:50px;" 
+							<input type="text" name="mobile2" value="<%=cell[1] %>" maxlength="4" class="join_input" style="width:50px;" 
 								onkeyup="commonFocusMove(this, 4, 'mobile3');" id="mobile2"/>&nbsp;-&nbsp;
-							<input type="text" name="mobile3" value="" maxlength="4" class="join_input" style="width:50px;" 
+							<input type="text" name="mobile3" value="<%=cell[2] %>" maxlength="4" class="join_input" style="width:50px;" 
 								onkeyup="commonFocusMove(this, 4, 'eamil1');" id="mobile3"/></td>
 					</tr>
 					<tr>
 						<th><img src="../images/join_tit08.gif" /></th>
 						<td>
  
-	<input type="text" name="email1" style="width:100px;height:20px;border:solid 1px #dadada;" value="" id="eamil1"/> @ 
-	<input type="text" name="email2" id="email2" style="width:150px;height:20px;border:solid 1px #dadada;" value="" onblur="emailCheck();"/>
+	<input type="text" name="email1" style="width:100px;height:20px;border:solid 1px #dadada;" value="<%=email[0]%>" id="eamil1"/> @ 
+	<input type="text" name="email2" id="email2" style="width:150px;height:20px;border:solid 1px #dadada;" value="<%=email[1]%>" onblur="emailCheck();"/>
 	<select name="last_email_check2" onChange="emailSelect(this);" class="pass" id="last_email_check2" >
 		<option selected="" value="">선택해주세요</option>
 		<option value="" >직접입력</option>
@@ -290,17 +313,17 @@
 					<tr>
 						<th><img src="../images/join_tit09.gif" /></th>
 						<td>
-						<input type="text" name="zipcode" value=""  class="join_input" style="width:50px;" />
+						<input type="text" name="zipcode" value="<%=zip[0] %>"  class="join_input" style="width:50px;" />
 						<a href="javascript:;" title="새 창으로 열림" onclick="zipcodeFind();">[우편번호검색]</a>
 						<br/>
 						
-						<input type="text" name="addr1" value=""  class="join_input" style="width:550px; margin-top:5px;" /><br>
-						<input type="text" name="addr2" value=""  class="join_input" style="width:550px; margin-top:5px;" />
+						<input type="text" name="addr1" value="<%=zip[1] %>"  class="join_input" style="width:550px; margin-top:5px;" /><br>
+						<input type="text" name="addr2" value="<%=zip[2] %>"  class="join_input" style="width:550px; margin-top:5px;" />
 						
 						</td>
 					</tr>
 				</table>
-				<p style="text-align:center; margin-bottom:20px"><button type="submit" class="btn-link"><img src="../images/btn01.gif" /></button>&nbsp;&nbsp;<a href="#"><img src="../images/btn02.gif" /></a></p>
+				<p style="text-align:center; margin-bottom:20px"><button type="submit" class="btn-link"><img src="../images/btn01.gif" /></button>&nbsp;&nbsp;<a href="../main/main.do"><img src="../images/btn02.gif" /></a></p>
 				</form>
 				
 			</div>

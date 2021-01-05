@@ -30,10 +30,8 @@ public class ListCtrl extends HttpServlet{
 		int totalRecordCount = dao.getTotalRecordCount();// join O
 		param.put("totalCount", totalRecordCount);
 		/*********** 페이지처리를 위한 코드 추가 start ************/ 
-		//한페이지에 출력할 레코드의 갯수 : 10
 		ServletContext application = this.getServletContext();
 		int pageSize = Integer.parseInt(application.getInitParameter("MARKET_PAGE_SIZE"));
-		//한 블럭당 출력할 페이지의 갯수 : 5
 		int blockPage = Integer.parseInt(application.getInitParameter("BLOCK_PAGE"));
 
 		int totalPage = (int)Math.ceil((double)totalRecordCount/pageSize);

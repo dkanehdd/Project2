@@ -99,7 +99,7 @@ $(function () {
 								</tr>
 								<tr>
 									<th><img src="../images/login_tit02.gif" alt="패스워드" /></th>
-									<td><input type="text" name="user_pw" value=""
+									<td><input type="password" name="user_pw" value=""
 										class="login_input" /></td>
 								</tr>
 							</table>
@@ -122,7 +122,7 @@ $(function () {
 							반갑습니다.<br />로그인 하셨습니다.
 						</p>
 						<p style="text-align: right; padding-right: 10px;">
-							<a href=""><img src="../images/login_btn04.gif" /></a> <a
+							<a href="../member/modify.jsp"><img src="../images/login_btn04.gif" /></a> <a
 								href="../member/Logout.jsp"><img
 								src="../images/login_btn05.gif" /></a>
 						</p>

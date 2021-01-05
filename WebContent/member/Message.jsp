@@ -23,6 +23,9 @@
 <c:choose>
 	<c:when test="${SUC_FAIL==1 }">
 		alert("${sucmsg }");
+		<%
+		session.setAttribute("USER_ID", request.getAttribute("user_id"));
+		%>
 		location.href="<c:url value='${sucurl }' />";
 	</c:when>
 	<c:when test="${SUC_FAIL==0 }">

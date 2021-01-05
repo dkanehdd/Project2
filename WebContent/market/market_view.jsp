@@ -24,7 +24,7 @@
 				<div class="market_view_box">
 					<div class="market_left">
 						<img src="../images/market/${dto.image }" style="width: 500px; height: 300px"/>
-						<p class="plus_btn"><a href=""><img src="../images/market/plus_btn.gif" /></a></p>
+						<p class="plus_btn"><a href="../images/market/${dto.image }" target="_blank"><img src="../images/market/plus_btn.gif" /></a></p>
 					</div>
 					<div class="market_right">
 						<p class="m_title">${dto.goods_name }
@@ -48,18 +48,16 @@
 								</dl>
 								<dl style="border-bottom:0px;">
 									<dt>주문정보</dt>
-									<dd><input type="text" name="" class="n_box" style="width:200px;" /></dd>
+									<dd>${dto.goods_content }</dd>
 								</dl>
 								<div style="clear:both;"></div>
 							</li>
 						</ul>
 						<p class="btn_box"><a href="addbasket2.jsp?num=${dto.num }&location=basket02.jsp"><img src="../images/market/m_btn01.gif" alt="바로구매" /></a>&nbsp;&nbsp;<button type="submit" style="border: 0;"><img src="../images/market/m_btn02.gif" alt="장바구니" /></button>
 						</p>
-						<p>${dto.goods_content }</p>
 						</form>
-						
-						<button class="btn btn-success" onclick="location.href='../market/list'">상품목록</button>
-						<button class="btn btn-danger" onclick="location.href='basket.jsp'">장바구니 바로가기</button>
+						<p class="btn_box"><button class="btn btn-success" onclick="location.href='../market/list'">상품목록</button>
+						<button class="btn btn-danger" onclick="location.href='basket.jsp'">장바구니 바로가기</button></p>
 						
 					</div>
 				</div>
